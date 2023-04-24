@@ -7,8 +7,10 @@
     <artifactId>abntester-backend</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <properties>
+        <commons.math>3.6.1</commons.math>
         <compiler-plugin.version>3.10.1</compiler-plugin.version>
         <kotlin.version>1.7.22</kotlin.version>
+        <kotlin.jackson>2.14.2</kotlin.jackson>
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -36,6 +38,10 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
         </dependency>
         <dependency>
@@ -49,6 +55,16 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>${kotlin.jackson}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>${commons.math}</version>
         </dependency>
         <!-- testing -->
         <dependency>
