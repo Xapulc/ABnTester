@@ -1,4 +1,4 @@
-package com.abntester.sample.twosample
+package com.abntester.sample.onesample
 
 import com.abntester.sample.SampleAlternative
 import java.math.BigDecimal
@@ -12,28 +12,28 @@ import javax.ws.rs.Path
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
-@Path("/api/two-sample/calculate")
-class TwoSampleCalculationController constructor(private val twoSampleCalculationService: TwoSampleCalculationService) {
+@Path("/api/one-sample/calculate")
+class OneSampleCalculationController constructor(private val oneSampleCalculationService: OneSampleCalculationService) {
+
 
     @POST
     @Path("/binary")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    fun calculateBinarySampleSize(@Valid request: TwoSampleBinaryCalculationRequest): TwoSampleCalculationResponse {
-        return twoSampleCalculationService.calcBinarySampleSize(request)
+    fun calculateBinarySampleSize(@Valid request: OneSampleBinaryCalculationRequest): OneSampleCalculationResponse {
+        return oneSampleCalculationService.calcBinarySampleSize(request)
     }
 
     @POST
     @Path("/non-binary")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    fun calculateNonBinarySampleSize(@Valid request: TwoSampleNonBinaryCalculationRequest): TwoSampleCalculationResponse {
-        return twoSampleCalculationService.calcNonBinarySampleSize(request)
+    fun calculateNonBinarySampleSize(@Valid request: OneSampleNonBinaryCalculationRequest): OneSampleCalculationResponse {
+        return oneSampleCalculationService.calcNonBinarySampleSize(request)
     }
-
 }
 
-data class TwoSampleBinaryCalculationRequest(
+data class OneSampleBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "1", inclusive = false)
     val alpha: BigDecimal,
@@ -45,13 +45,10 @@ data class TwoSampleBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "1", inclusive = false)
     val p: BigDecimal,
-    @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
-    val leftProportion: BigDecimal,
     val alternative: SampleAlternative,
 )
 
-data class TwoSampleNonBinaryCalculationRequest(
+data class OneSampleNonBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "1", inclusive = false)
     val alpha: BigDecimal,
@@ -62,13 +59,10 @@ data class TwoSampleNonBinaryCalculationRequest(
     val mde: BigDecimal,
     @field:Positive
     val variance: BigDecimal,
-    @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
-    val leftProportion: BigDecimal,
     val alternative: SampleAlternative,
 )
 
-data class TwoSampleCalculationResponse(
-    val leftSampleSize: Int,
-    val rightSampleSize: Int,
+data class OneSampleCalculationResponse(
+    val sampleSize: Int,
 )
+
