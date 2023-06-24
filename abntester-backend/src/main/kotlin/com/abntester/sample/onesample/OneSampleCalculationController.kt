@@ -35,25 +35,25 @@ class OneSampleCalculationController constructor(private val oneSampleCalculatio
 
 data class OneSampleBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val alpha: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val beta: BigDecimal,
     @field:Positive
     val mde: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val p: BigDecimal,
     val alternative: SampleAlternative,
 )
 
 data class OneSampleNonBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val alpha: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val beta: BigDecimal,
     @field:Positive
     val mde: BigDecimal,

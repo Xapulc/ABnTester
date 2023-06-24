@@ -21,27 +21,6 @@
         <div class="tui-form__row">
           <one-two-sided-alternative-param formControlName="alternative"/>
         </div>
-        <div class="tui-form__row tui-form__row_multi-fields">
-          <div class="tui-form__multi-field">
-            <tui-input-number
-              formControlName="firstSampleProportion"
-              [tuiTextfieldPostfix]="'%'"
-              [min]="0.01"
-              [max]="99.99"
-              [precision]="2"
-            >
-              First sample proportion
-            </tui-input-number>
-          </div>
-          <div class="tui-form__multi-field">
-            <tui-input-number
-              formControlName="secondSampleProportion"
-              [tuiTextfieldPostfix]="'%'"
-            >
-              Second sample proportion
-            </tui-input-number>
-          </div>
-        </div>
 
         <div class="tui-form__buttons">
           <button
@@ -61,10 +40,7 @@
   </form>
   <div *ngIf="showResult">
     <p>
-      left: {{leftSampleSize}}
-    </p>
-    <p>
-      right: {{rightSampleSize}}
+      sample size: {{sampleSize}}
     </p>
   </div>
 </div>

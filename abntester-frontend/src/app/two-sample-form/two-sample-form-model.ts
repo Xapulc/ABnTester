@@ -20,8 +20,3 @@ export interface CalculateTwoSampleResponse {
   leftSampleSize: number,
   rightSampleSize: number,
 }
-
-export enum TwoSampleType {
-  BINARY = 'BINARY',
-  NON_BINARY = 'NON_BINARY'
-}

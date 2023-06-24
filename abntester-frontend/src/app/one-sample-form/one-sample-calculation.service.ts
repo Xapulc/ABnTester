@@ -1,0 +1,27 @@
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {
+  CalculateOneSampleBinaryRequest,
+  CalculateOneSampleNonBinaryRequest,
+  CalculateOneSampleResponse,
+} from './one-sample-form-model';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class OneSampleCalculationService {
+
+  constructor(private http: HttpClient) {
+  }
+
+  basePath = '/api/one-sample/calculate'
+
+  calculateBinary(request: CalculateOneSampleBinaryRequest): Observable<CalculateOneSampleResponse> {
+    return this.http.post<CalculateOneSampleResponse>(`${this.basePath}/binary`, request);
+  }
+
+  calculateNonBinary(request: CalculateOneSampleNonBinaryRequest) {
+    return this.http.post<CalculateOneSampleResponse>(`${this.basePath}/non-binary`, request);
+  }
+}
