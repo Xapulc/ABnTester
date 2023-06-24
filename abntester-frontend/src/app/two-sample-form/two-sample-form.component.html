@@ -32,8 +32,8 @@
             <tui-input-number
               formControlName="alpha"
               [tuiTextfieldPostfix]="'%'"
-              [min]="0"
-              [max]="100"
+              [min]="0.01"
+              [max]="99.99"
               [precision]="2"
             >
               &alpha;
@@ -48,8 +48,8 @@
             <tui-input-number
               formControlName="beta"
               [tuiTextfieldPostfix]="'%'"
-              [min]="0"
-              [max]="100"
+              [min]="0.01"
+              [max]="99.99"
               [precision]="2"
             >
               &beta;
@@ -66,8 +66,7 @@
             <tui-input-number
               formControlName="mde"
               [tuiTextfieldPostfix]="'%'"
-              [min]="0"
-              [max]="100"
+              [min]="0.00001"
               [precision]="5"
             >
               MDE
@@ -82,8 +81,8 @@
             <tui-input-number
               formControlName="probability"
               [tuiTextfieldPostfix]="'%'"
-              [min]="0"
-              [max]="100"
+              [min]="0.01"
+              [max]="99.99"
               [precision]="2"
             >
               p
@@ -97,7 +96,7 @@
           <div class="tui-form__multi-field" *ngIf="isNonBinaryCase()">
             <tui-input-number
               formControlName="variance"
-              [min]="0"
+              [min]="0.000001"
               [precision]="6"
             >
               variance
@@ -139,9 +138,9 @@
             <tui-input-number
               formControlName="firstSampleProportion"
               [tuiTextfieldPostfix]="'%'"
-              [min]="0"
-              [max]="100"
-              [precision]="5"
+              [min]="0.01"
+              [max]="99.99"
+              [precision]="2"
             >
               First sample proprtion
             </tui-input-number>
@@ -155,9 +154,6 @@
             <tui-input-number
               formControlName="secondSampleProportion"
               [tuiTextfieldPostfix]="'%'"
-              [min]="0"
-              [max]="100"
-              [precision]="2"
             >
               Second sample proportion
             </tui-input-number>

@@ -9,3 +9,4 @@ operator fun Int.minus(bigDecimal: BigDecimal): BigDecimal {
 operator fun BigDecimal.div(int: Int) : BigDecimal {
     return this.divide(int.toBigDecimal())
 }
+

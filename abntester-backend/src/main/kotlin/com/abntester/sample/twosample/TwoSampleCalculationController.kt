@@ -35,35 +35,35 @@ class TwoSampleCalculationController constructor(private val twoSampleCalculatio
 
 data class TwoSampleBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val alpha: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val beta: BigDecimal,
     @field:Positive
     val mde: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val p: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val leftProportion: BigDecimal,
     val alternative: SampleAlternative,
 )
 
 data class TwoSampleNonBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val alpha: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val beta: BigDecimal,
     @field:Positive
     val mde: BigDecimal,
     @field:Positive
     val variance: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
-    @field:DecimalMax(value = "1", inclusive = false)
+    @field:DecimalMax(value = "100", inclusive = false)
     val leftProportion: BigDecimal,
     val alternative: SampleAlternative,
 )

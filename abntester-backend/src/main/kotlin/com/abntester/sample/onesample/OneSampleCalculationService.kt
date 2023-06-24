@@ -3,6 +3,7 @@ package com.abntester.sample.onesample
 import com.abntester.sample.GeneralSampleSizeCalculationParams
 import com.abntester.sample.GeneralSampleSizeCalculationResult
 import com.abntester.sample.GeneralSampleSizeCalculationService
+import com.abntester.utils.div
 import com.abntester.utils.minus
 import javax.enterprise.context.ApplicationScoped
 
@@ -16,7 +17,7 @@ class OneSampleCalculationService constructor(private val generalSampleSizeCalcu
     }
 
     private fun OneSampleBinaryCalculationRequest.toCalcParams() = GeneralSampleSizeCalculationParams(
-        alpha, beta, mde, p * (1 - p), alternative
+        alpha.div(100), beta.div(100), mde.div(100), p.div(100) * (1 - p.div(100)), alternative
     )
 
     fun calcNonBinarySampleSize(request: OneSampleNonBinaryCalculationRequest): OneSampleCalculationResponse {
@@ -26,7 +27,7 @@ class OneSampleCalculationService constructor(private val generalSampleSizeCalcu
     }
 
     private fun OneSampleNonBinaryCalculationRequest.toCalcParams() = GeneralSampleSizeCalculationParams(
-        alpha, beta, mde, variance, alternative
+        alpha.div(100), beta.div(100), mde.div(100), variance, alternative
     )
 
 }
