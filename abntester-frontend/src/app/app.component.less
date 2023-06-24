@@ -1,0 +1,40 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+:host {
+  display: block;
+  margin: -2rem;
+  background: #F6F7F8;
+  color: #2d2d2d;
+}
+
+.wrapper {
+  .inset-border(bottom, light);
+  display: flex;
+  flex-direction: row;
+  //align-items: flex-start;
+  padding: 2rem 2rem 0;
+}
+
+.content {
+  padding: 2rem 2rem 4rem;
+}
+
+.title {
+  min-width: 15.625rem;
+  margin: 0;
+}
+
+.tabs {
+  width: ~'calc(100% - 15.625rem)';
+  justify-content: flex-end;
+  box-shadow: none;
+}
+
+.icon {
+  .transition(transform);
+  margin-left: 0.25rem;
+
+  &_rotated {
+    transform: rotate(180deg);
+  }
+}

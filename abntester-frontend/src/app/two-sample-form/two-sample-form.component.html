@@ -1,0 +1,113 @@
+<div class="tui-container">
+  <form [formGroup]="form">
+    <div class="tui-row">
+      <div class="tui-col_8">
+        <div class="tui-form__row tui-form__row_multi-fields">
+          <div class="tui-form__multi-field">
+            <tui-input-number
+              formControlName="alpha"
+              [tuiTextfieldPostfix]="'%'"
+              [min]="0"
+              [max]="100"
+              [precision]="2"
+            >
+              &alpha;
+            </tui-input-number>
+            <tui-error
+              formControlName="alpha"
+              [error]="[] | tuiFieldError | async"
+            >
+            </tui-error>
+          </div>
+          <div class="tui-form__multi-field">
+            <tui-input-number
+              formControlName="beta"
+              [tuiTextfieldPostfix]="'%'"
+              [min]="0"
+              [max]="100"
+              [precision]="2"
+            >
+              &beta;
+            </tui-input-number>
+            <tui-error
+              formControlName="beta"
+              [error]="[] | tuiFieldError | async"
+            >
+            </tui-error>
+          </div>
+        </div>
+        <div class="tui-form__row tui-form__row_multi-fields">
+          <div class="tui-form__multi-field">
+            <tui-input-number
+              formControlName="mde"
+              [tuiTextfieldPostfix]="'%'"
+              [min]="0"
+              [max]="100"
+              [precision]="5"
+            >
+              MDE
+            </tui-input-number>
+            <tui-error
+              formControlName="mde"
+              [error]="[] | tuiFieldError | async"
+            >
+            </tui-error>
+          </div>
+          <div class="tui-form__multi-field">
+            <tui-input-number
+              formControlName="probability"
+              [tuiTextfieldPostfix]="'%'"
+              [min]="0"
+              [max]="100"
+              [precision]="2"
+            >
+              p
+            </tui-input-number>
+            <tui-error
+              formControlName="probability"
+              [error]="[] | tuiFieldError | async"
+            >
+            </tui-error>
+          </div>
+        </div>
+        <div
+          tuiGroup
+          class="tui-form__row"
+          [adaptive]="true"
+          [collapsed]="true"
+        >
+          <tui-radio-block
+            [hideRadio]="true"
+            contentAlign="right"
+            formControlName="alternative"
+            item="ONE_SIDED"
+            size="l"
+          >
+            One sided
+          </tui-radio-block>
+          <tui-radio-block
+            [hideRadio]="true"
+            contentAlign="right"
+            formControlName="alternative"
+            item="TWO_SIDED"
+            size="l"
+          >
+            Two sided
+          </tui-radio-block>
+        </div>
+        <div class="tui-form__buttons">
+          <button
+            tuiButton
+            size="l"
+            type="submit"
+            class="tui-form__button"
+            [disabled]="form.invalid"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
