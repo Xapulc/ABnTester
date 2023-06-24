@@ -20,6 +20,7 @@ import {
 } from '@taiga-ui/kit';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
     TuiFieldErrorPipeModule,
     TuiGroupModule,
     TuiRadioBlockModule,
+    HttpClientModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],

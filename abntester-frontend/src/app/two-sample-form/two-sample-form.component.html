@@ -2,6 +2,32 @@
   <form [formGroup]="form">
     <div class="tui-row">
       <div class="tui-col_8">
+        <div
+          tuiGroup
+          class="tui-form__row"
+          [adaptive]="true"
+          [collapsed]="true"
+        >
+          <tui-radio-block
+            [hideRadio]="true"
+            contentAlign="right"
+            formControlName="type"
+            item="BINARY"
+            size="l"
+          >
+            Binary
+          </tui-radio-block>
+          <tui-radio-block
+            [hideRadio]="true"
+            contentAlign="right"
+            formControlName="type"
+            [pseudoDisabled]="true"
+            item="NON_BINARY"
+            size="l"
+          >
+            Non binary
+          </tui-radio-block>
+        </div>
         <div class="tui-form__row tui-form__row_multi-fields">
           <div class="tui-form__multi-field">
             <tui-input-number
@@ -95,6 +121,41 @@
             Two sided
           </tui-radio-block>
         </div>
+        <div class="tui-form__row tui-form__row_multi-fields">
+          <div class="tui-form__multi-field">
+            <tui-input-number
+              formControlName="firstSampleProportion"
+              [tuiTextfieldPostfix]="'%'"
+              [min]="0"
+              [max]="100"
+              [precision]="5"
+            >
+              First sample proprtion
+            </tui-input-number>
+            <tui-error
+              formControlName="firstSampleProportion"
+              [error]="[] | tuiFieldError | async"
+            >
+            </tui-error>
+          </div>
+          <div class="tui-form__multi-field">
+            <tui-input-number
+              formControlName="secondSampleProportion"
+              [tuiTextfieldPostfix]="'%'"
+              [min]="0"
+              [max]="100"
+              [precision]="2"
+            >
+              Second sample proportion
+            </tui-input-number>
+            <tui-error
+              formControlName="secondSampleProportion"
+              [error]="[] | tuiFieldError | async"
+            >
+            </tui-error>
+          </div>
+        </div>
+
         <div class="tui-form__buttons">
           <button
             tuiButton
@@ -102,6 +163,7 @@
             type="submit"
             class="tui-form__button"
             [disabled]="form.invalid"
+            (click)="onSubmit()"
           >
             Submit
           </button>
@@ -110,4 +172,12 @@
     </div>
 
   </form>
+  <div *ngIf="showResult">
+    <p>
+      left: {{leftSampleSize}}
+    </p>
+    <p>
+      right: {{rightSampleSize}}
+    </p>
+  </div>
 </div>
