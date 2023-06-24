@@ -21,7 +21,6 @@
             [hideRadio]="true"
             contentAlign="right"
             formControlName="type"
-            [pseudoDisabled]="true"
             item="NON_BINARY"
             size="l"
           >
@@ -79,7 +78,7 @@
             >
             </tui-error>
           </div>
-          <div class="tui-form__multi-field">
+          <div class="tui-form__multi-field" *ngIf="isBinaryCase()">
             <tui-input-number
               formControlName="probability"
               [tuiTextfieldPostfix]="'%'"
@@ -91,6 +90,20 @@
             </tui-input-number>
             <tui-error
               formControlName="probability"
+              [error]="[] | tuiFieldError | async"
+            >
+            </tui-error>
+          </div>
+          <div class="tui-form__multi-field" *ngIf="isNonBinaryCase()">
+            <tui-input-number
+              formControlName="variance"
+              [min]="0"
+              [precision]="6"
+            >
+              variance
+            </tui-input-number>
+            <tui-error
+              formControlName="variance"
               [error]="[] | tuiFieldError | async"
             >
             </tui-error>

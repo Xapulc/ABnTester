@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CalculateTwoSampleBinaryRequest, CalculateTwoSampleResponse} from './two-sample-form-model';
-import {HttpClient} from '@angular/common/http';
+import {
+  CalculateTwoSampleBinaryRequest,
+  CalculateTwoSampleNonBinaryRequest, CalculateTwoSampleResponse,
+  TwoSampleType,
+} from './two-sample-form-model';
 import {TwoSampleCalculationService} from './two-sample-calculation.service';
 
 @Component({
@@ -23,6 +26,7 @@ export class TwoSampleFormComponent implements OnInit {
     beta: new FormControl(5, Validators.required),
     mde: new FormControl(5, Validators.required),
     probability: new FormControl(5, Validators.required),
+    variance: new FormControl(100),
     firstSampleProportion: new FormControl(50, Validators.required),
     secondSampleProportion: new FormControl({value: 50, disabled: true}, Validators.required),
     alternative: new FormControl('ONE_SIDED', Validators.required),
@@ -35,15 +39,45 @@ export class TwoSampleFormComponent implements OnInit {
         if (value != null) {
           this.form.get('secondSampleProportion')?.setValue(100 - value)
         }
-      })
+      });
+    this.form.get('type')?.valueChanges.subscribe(
+      value => {
+        if (value === TwoSampleType.BINARY) {
+          this.form.get('probability')?.setValidators(Validators.required)
+          this.form.get('variance')?.clearValidators()
+        }
+        if (value === TwoSampleType.NON_BINARY) {
+          this.form.get('variance')?.setValidators(Validators.required)
+          this.form.get('probability')?.clearValidators()
+        }
+      },
+    )
   }
 
   onSubmit(): void {
-    this.twoSampleCalculationService.calculateBinary(this.formToBinaryCalcRequest()).subscribe(response => {
-      this.showResult = true
-      this.rightSampleSize = response.rightSampleSize
-      this.leftSampleSize = response.leftSampleSize
-    })
+    if (this.isBinaryCase()) {
+      this.twoSampleCalculationService.calculateBinary(this.formToBinaryCalcRequest()).subscribe(this.handleResponse)
+    }
+    if (this.isNonBinaryCase()) {
+      this.twoSampleCalculationService.calculateNonBinary(this.formToNonBinaryCalcRequest()).subscribe(this.handleResponse)
+    }
+  }
+
+  private handleResponse = (response: CalculateTwoSampleResponse) => {
+    this.showResult = true
+    this.rightSampleSize = response.rightSampleSize
+    this.leftSampleSize = response.leftSampleSize
+  }
+
+  private formToNonBinaryCalcRequest(): CalculateTwoSampleNonBinaryRequest {
+    return <CalculateTwoSampleNonBinaryRequest>{
+      alpha: this.form.get('alpha')?.value / 100,
+      beta: this.form.get('beta')?.value / 100,
+      variance: this.form.get('variance')?.value,
+      mde: this.form.get('mde')?.value / 100,
+      alternative: this.form.get('alternative')?.value,
+      leftProportion: this.form.get('firstSampleProportion')?.value / 100,
+    }
   }
 
   private formToBinaryCalcRequest(): CalculateTwoSampleBinaryRequest {
@@ -55,5 +89,13 @@ export class TwoSampleFormComponent implements OnInit {
       alternative: this.form.get('alternative')?.value,
       leftProportion: this.form.get('firstSampleProportion')?.value / 100,
     }
+  }
+
+  isBinaryCase() {
+    return this.form.get('type')?.value === TwoSampleType.BINARY
+  }
+
+  isNonBinaryCase() {
+    return this.form.get('type')?.value === TwoSampleType.NON_BINARY
   }
 }
