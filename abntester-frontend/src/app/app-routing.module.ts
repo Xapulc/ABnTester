@@ -4,8 +4,9 @@ import {TwoSampleFormComponent} from './two-sample-form/two-sample-form.componen
 import {OneSampleFormComponent} from './one-sample-form/one-sample-form.component';
 
 const routes: Routes = [
-  {'path': 'calculation/two-sample', component: TwoSampleFormComponent},
-  {'path': 'calculation/one-sample', component: OneSampleFormComponent},
+  {path: 'calculation/two-sample', component: TwoSampleFormComponent},
+  {path: 'calculation/one-sample', component: OneSampleFormComponent},
+  {path: '**', redirectTo: 'calculation/two-sample', pathMatch: 'full'},
 ];
 
 @NgModule({
