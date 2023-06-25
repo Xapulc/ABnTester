@@ -16,7 +16,7 @@ class GeneralSampleSizeCalculationService {
     fun calcSampleSize(params: GeneralSampleSizeCalculationParams): GeneralSampleSizeCalculationResult {
         with(params) {
             val alphaCorrected = when (alternative) {
-                SampleAlternative.ONE_SIDED -> alpha
+                SampleAlternative.LEFT_SIDED, SampleAlternative.RIGHT_SIDED -> alpha
                 SampleAlternative.TWO_SIDED -> alpha / 2
             }
             val zOneMinusAlpha =
@@ -37,7 +37,7 @@ data class GeneralSampleSizeCalculationParams(
 )
 
 enum class SampleAlternative {
-    ONE_SIDED, TWO_SIDED
+    LEFT_SIDED, RIGHT_SIDED, TWO_SIDED
 }
 
 data class GeneralSampleSizeCalculationResult(

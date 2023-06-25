@@ -17,6 +17,6 @@ import {
 })
 export class OneTwoSidedAlternativeComponent extends DefaultFormControlValueAccessorComponent {
 
-  form = new FormControl('ONE_SIDED', Validators.required)
+  form = new FormControl('RIGHT_SIDED', Validators.required)
 
 }

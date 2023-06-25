@@ -24,10 +24,10 @@ export class OneSampleFormComponent {
     alpha: new FormControl(5, Validators.required),
     beta: new FormControl(20, Validators.required),
     mdePercent: new FormControl(1.5, Validators.required),
-    mdeAbs: new FormControl(10),
+    mdeAbs: new FormControl(1),
     probability: new FormControl(10, Validators.required),
     variance: new FormControl(100),
-    alternative: new FormControl('ONE_SIDED', Validators.required),
+    alternative: new FormControl('RIGHT_SIDED', Validators.required),
     type: new FormControl('BINARY', Validators.required),
   });
 
