@@ -30,7 +30,7 @@
               [max]="99.99"
               [precision]="2"
             >
-              First sample proportion
+              Доля первой выборки
             </tui-input-number>
           </div>
           <div class="tui-form__multi-field">
@@ -38,7 +38,7 @@
               formControlName="secondSampleProportion"
               [tuiTextfieldPostfix]="'%'"
             >
-              Second sample proportion
+              Доля второй выборки
             </tui-input-number>
           </div>
         </div>
@@ -52,7 +52,7 @@
             [disabled]="form.invalid"
             (click)="onSubmit()"
           >
-            Submit
+            Рассчитать
           </button>
         </div>
       </div>
@@ -61,10 +61,10 @@
   </form>
   <div *ngIf="showResult">
     <p>
-      left: {{leftSampleSize}}
+      Размер первой выборки: {{leftSampleSize}}
     </p>
     <p>
-      right: {{rightSampleSize}}
+      Размер второй выборки: {{rightSampleSize}}
     </p>
   </div>
 </div>

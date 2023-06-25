@@ -21,6 +21,7 @@ import {
   TuiRadioBlockModule,
   TuiTabsModule,
 } from '@taiga-ui/kit';
+import {TUI_LANGUAGE, TUI_RUSSIAN_LANGUAGE} from '@taiga-ui/i18n';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -35,6 +36,7 @@ import {
 import {ProbabilityComponent} from './parameters/probability/probability.component';
 import {VarianceComponent} from './parameters/variance/variance.component';
 import {GlobalHttpInterceptor} from './interceptor/global-http-interceptor';
+import {of} from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,12 @@ import {GlobalHttpInterceptor} from './interceptor/global-http-interceptor';
     HttpClientModule,
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
-    {provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptor, multi: true}],
+    {provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptor, multi: true},
+    {
+      provide: TUI_LANGUAGE,
+      useValue: of(TUI_RUSSIAN_LANGUAGE),
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
