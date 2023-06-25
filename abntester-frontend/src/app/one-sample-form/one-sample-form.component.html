@@ -6,7 +6,9 @@
           <is-binary-radio-param formControlName="type"/>
         </div>
         <div class="tui-form__row tui-form__row_multi-fields">
-          <alpha-param formControlName="alpha" class="tui-form__multi-field"/>
+          <alpha-param formControlName="alpha"
+                       [hintContent]="getSuitableHintContent().alpha"
+                       class="tui-form__multi-field"/>
           <beta-param formControlName="beta" class="tui-form__multi-field"/>
         </div>
         <div class="tui-form__row tui-form__row_multi-fields" *ngIf="isBinaryCase()">

@@ -1,4 +1,4 @@
-<div>
+<div tuiGroup>
   <tui-input-number
     [formControl]="form"
     [tuiTextfieldPostfix]="'%'"
@@ -8,9 +8,13 @@
   >
     &alpha; - уровень значимости
   </tui-input-number>
-  <!--  <tui-error-->
-  <!--    [formConrol]="form"-->
-  <!--    [error]="[] | tuiFieldError | async"-->
-  <!--  >-->
-  <!--  </tui-error>-->
+  <button tuiIconButton type="button" class="help-button"
+          (click)="showHint()"
+          [icon]="'tuiIconHelpCircleLarge'"></button>
 </div>
+<ng-template
+  [tuiDialogOptions]="{label: 'Подсказка', size: 'm'}"
+  [(tuiDialog)]="openHint"
+>
+  <div [mathjax]="hintContent"></div>
+</ng-template>

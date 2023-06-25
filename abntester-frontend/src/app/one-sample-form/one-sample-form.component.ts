@@ -7,6 +7,8 @@ import {
   CalculateOneSampleNonBinaryRequest,
   CalculateOneSampleResponse,
 } from './one-sample-form-model';
+import {getSuitableHintContent} from '../hint-content/hint-content.utils';
+import {oneSampleHints} from './one-sample-hint-messages.model';
 
 @Component({
   selector: 'app-one-sample-form',
@@ -90,6 +92,10 @@ export class OneSampleFormComponent {
 
   isNonBinaryCase() {
     return this.form.get('type')?.value === BinarySampleType.NON_BINARY
+  }
+
+  getSuitableHintContent() {
+    return getSuitableHintContent(this.form.get('type')?.value, this.form.get('alternative')?.value, oneSampleHints)
   }
 
 }

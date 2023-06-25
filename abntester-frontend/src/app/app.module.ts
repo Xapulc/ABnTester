@@ -3,6 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {
   TuiAlertModule,
   TuiButtonModule,
+  TuiDialogModule,
   TuiErrorModule,
   TuiGroupModule,
   TuiHintModule,
@@ -39,6 +40,7 @@ import {VarianceComponent} from './parameters/variance/variance.component';
 import {GlobalHttpInterceptor} from './interceptor/global-http-interceptor';
 import {of} from 'rxjs';
 import {MdeAbsComponent} from './parameters/mde-abs/mde-abs.component';
+import {MathjaxModule} from 'mathjax-angular';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,8 @@ import {MdeAbsComponent} from './parameters/mde-abs/mde-abs.component';
     TuiAlertModule,
     HttpClientModule,
     TuiLabelModule,
+    MathjaxModule.forRoot(),
+    TuiDialogModule,
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
     {provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptor, multi: true},

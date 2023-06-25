@@ -1,10 +1,12 @@
 import {ControlValueAccessor, FormControl} from '@angular/forms';
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({template: ''})
 export abstract class DefaultFormControlValueAccessorComponent<T = any> implements ControlValueAccessor {
 
   abstract form: FormControl
+  openHint = false
+  @Input() hintContent: string = ''
 
   onChange = (_: number | null) => {
   };
@@ -33,6 +35,10 @@ export abstract class DefaultFormControlValueAccessorComponent<T = any> implemen
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe(value => this.onChange(value))
+  }
+
+  showHint() {
+    this.openHint = true
   }
 
 }

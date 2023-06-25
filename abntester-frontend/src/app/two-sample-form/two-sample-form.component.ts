@@ -8,6 +8,8 @@ import {
 import {TwoSampleCalculationService} from './two-sample-calculation.service';
 import Decimal from 'decimal.js';
 import {BinarySampleType} from '../parameters/is-binary-radio/is-binary-radio.model';
+import {twoSampleHints} from './two-sample-hint-messages.model';
+import {getSuitableHintContent} from '../hint-content/hint-content.utils';
 
 @Component({
   selector: 'app-two-sample-form',
@@ -103,5 +105,9 @@ export class TwoSampleFormComponent implements OnInit {
 
   isNonBinaryCase() {
     return this.form.get('type')?.value === BinarySampleType.NON_BINARY
+  }
+
+  getSuitableHintContent() {
+    return getSuitableHintContent(this.form.get('type')?.value, this.form.get('alternative')?.value, twoSampleHints)
   }
 }
