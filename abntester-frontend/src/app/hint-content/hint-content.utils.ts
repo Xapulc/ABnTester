@@ -14,5 +14,6 @@ export function getSuitableHintContent(sampleType: BinarySampleType,
 function defaultEmptyParams(): HintContentParams {
   return {
     alpha: '',
+    beta: '',
   }
 }

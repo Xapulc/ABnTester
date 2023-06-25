@@ -1,4 +1,4 @@
-<div>
+<div tuiGroup>
   <tui-input-number
     [formControl]="form"
     [tuiTextfieldPostfix]="'%'"
@@ -8,4 +8,13 @@
   >
     &beta; - вероятность ошибки II рода
   </tui-input-number>
+  <button tuiIconButton type="button" class="help-button"
+          (click)="showHint()"
+          [icon]="'tuiIconHelpCircleLarge'"></button>
 </div>
+<ng-template
+  [tuiDialogOptions]="{label: 'Подсказка', size: 'm'}"
+  [(tuiDialog)]="openHint"
+>
+  <div [mathjax]="hintContent"></div>
+</ng-template>
