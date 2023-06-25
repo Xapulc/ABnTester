@@ -27,7 +27,7 @@ class OneSampleCalculationService constructor(private val generalSampleSizeCalcu
     }
 
     private fun OneSampleNonBinaryCalculationRequest.toCalcParams() = GeneralSampleSizeCalculationParams(
-        alpha.div(100), beta.div(100), mde.div(100), variance, alternative
+        alpha.div(100), beta.div(100), mde, variance, alternative
     )
 
 }

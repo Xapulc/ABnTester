@@ -29,7 +29,7 @@ import {OneSampleFormComponent} from './one-sample-form/one-sample-form.componen
 import {IsBinaryRadioComponent} from './parameters/is-binary-radio/is-binary-radio.component';
 import {AlphaComponent} from './parameters/alpha/alpha.component';
 import {BetaComponent} from './parameters/beta/beta.component';
-import {MdeComponent} from './parameters/mde/mde.component';
+import {MdePercentComponent} from './parameters/mde-percent/mde-percent.component';
 import {
   OneTwoSidedAlternativeComponent,
 } from './parameters/one-two-sided-alternative/one-two-sided-alternative.component';
@@ -37,6 +37,7 @@ import {ProbabilityComponent} from './parameters/probability/probability.compone
 import {VarianceComponent} from './parameters/variance/variance.component';
 import {GlobalHttpInterceptor} from './interceptor/global-http-interceptor';
 import {of} from 'rxjs';
+import {MdeAbsComponent} from './parameters/mde-abs/mde-abs.component';
 
 @NgModule({
   declarations: [
@@ -46,10 +47,11 @@ import {of} from 'rxjs';
     IsBinaryRadioComponent,
     AlphaComponent,
     BetaComponent,
-    MdeComponent,
+    MdePercentComponent,
     OneTwoSidedAlternativeComponent,
     ProbabilityComponent,
     VarianceComponent,
+    MdeAbsComponent,
   ],
   imports: [
     BrowserModule,

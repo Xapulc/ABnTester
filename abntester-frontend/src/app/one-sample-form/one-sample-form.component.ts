@@ -22,9 +22,10 @@ export class OneSampleFormComponent {
 
   form: FormGroup = new FormGroup({
     alpha: new FormControl(5, Validators.required),
-    beta: new FormControl(5, Validators.required),
-    mde: new FormControl(5, Validators.required),
-    probability: new FormControl(5, Validators.required),
+    beta: new FormControl(20, Validators.required),
+    mdePercent: new FormControl(1.5, Validators.required),
+    mdeAbs: new FormControl(10),
+    probability: new FormControl(10, Validators.required),
     variance: new FormControl(100),
     alternative: new FormControl('ONE_SIDED', Validators.required),
     type: new FormControl('BINARY', Validators.required),
@@ -35,11 +36,15 @@ export class OneSampleFormComponent {
       value => {
         if (value === BinarySampleType.BINARY) {
           this.form.get('probability')?.setValidators(Validators.required)
+          this.form.get('mdePercent')?.setValidators(Validators.required)
           this.form.get('variance')?.clearValidators()
+          this.form.get('mdeAbs')?.clearValidators()
         }
         if (value === BinarySampleType.NON_BINARY) {
           this.form.get('variance')?.setValidators(Validators.required)
+          this.form.get('mdeAbs')?.setValidators(Validators.required)
           this.form.get('probability')?.clearValidators()
+          this.form.get('mdePercent')?.clearValidators()
         }
       },
     )
@@ -64,7 +69,7 @@ export class OneSampleFormComponent {
       alpha: this.form.get('alpha')?.value,
       beta: this.form.get('beta')?.value,
       variance: this.form.get('variance')?.value,
-      mde: this.form.get('mde')?.value,
+      mde: this.form.get('mdeAbs')?.value,
       alternative: this.form.get('alternative')?.value,
     }
   }
@@ -74,7 +79,7 @@ export class OneSampleFormComponent {
       alpha: this.form.get('alpha')?.value,
       beta: this.form.get('beta')?.value,
       p: this.form.get('probability')?.value,
-      mde: this.form.get('mde')?.value,
+      mde: this.form.get('mdePercent')?.value,
       alternative: this.form.get('alternative')?.value,
     }
   }

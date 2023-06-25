@@ -17,6 +17,6 @@ import {
 })
 export class VarianceComponent extends DefaultFormControlValueAccessorComponent {
 
-  form = new FormControl(5, Validators.required)
+  form = new FormControl(100, Validators.required)
 
 }

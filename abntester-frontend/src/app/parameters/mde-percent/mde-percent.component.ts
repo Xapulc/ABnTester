@@ -5,18 +5,18 @@ import {
 } from '../../utils/default-form-control-value-accessor/default-form-control-value-accessor.component';
 
 @Component({
-  selector: 'mde-param',
-  templateUrl: './mde.component.html',
+  selector: 'mde-percent-param',
+  templateUrl: './mde-percent.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: MdeComponent,
+      useExisting: MdePercentComponent,
     },
   ],
 })
-export class MdeComponent extends DefaultFormControlValueAccessorComponent {
+export class MdePercentComponent extends DefaultFormControlValueAccessorComponent {
 
-  form = new FormControl(5, Validators.required)
+  form = new FormControl(1.5, Validators.required)
 
 }

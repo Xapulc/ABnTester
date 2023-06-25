@@ -17,6 +17,6 @@ import {
 })
 export class BetaComponent extends DefaultFormControlValueAccessorComponent {
 
-  form: FormControl = new FormControl(5, Validators.required)
+  form: FormControl = new FormControl(20, Validators.required)
 
 }
