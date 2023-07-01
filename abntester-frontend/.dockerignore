@@ -1,0 +1,8 @@
+**/.editorconfig
+**/.vscode/
+**/node_modules/
+**/dist
+**/.idea/
+**/.gitignore
+**/.angular/
+**/.git/
