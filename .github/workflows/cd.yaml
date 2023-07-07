@@ -12,9 +12,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18.16.1'
-      - run: cd abntester-frontend
       - run: npm run build
+        working-directory: ./abntester-frontend
       - uses: actions/upload-artifact@master
+        working-directory: ./abntester-frontend
         with:
           name: dist
           path: dist/
@@ -23,8 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - run: cd abntester-frontend
       - uses: actions/download-artifact@master
+        working-directory: ./abntester-frontend
         with:
           name: dist
           path: dist/
@@ -39,6 +40,7 @@ jobs:
         with:
           images: uskharlamova/abntester-frontend
       - name: Build and push Docker image
+        working-directory: ./abntester-frontend
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
@@ -56,8 +58,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - run: cd abntester-backend
       - name: Build with Maven
+        working-directory: ./abntester-backend
         run: mvn package
       - uses: actions/upload-artifact@master
         with:
@@ -68,8 +70,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - run: cd abntester-backend
       - uses: actions/download-artifact@master
+        working-directory: ./abntester-backend
         with:
           name: target
           path: target/
@@ -84,6 +86,7 @@ jobs:
         with:
           images: uskharlamova/abntester-backend
       - name: Build and push Docker image
+        working-directory: ./abntester-backend
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
