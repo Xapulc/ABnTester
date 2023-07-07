@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18.16.1'
+      - run: npm install --legacy-peer-deps
+        working-directory: ./abntester-frontend
       - run: npm run build
         working-directory: ./abntester-frontend
       - uses: actions/upload-artifact@master

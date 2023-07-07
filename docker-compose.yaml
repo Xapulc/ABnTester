@@ -1,11 +1,11 @@
 services:
   backend:
-    image: uskharlamova/abntester-backend:latest
+    image: uskharlamova/abntester-backend:main
     environment:
       - CORS_ORIGINS=${CORS_ORIGINS}
     ports:
       - "8080:8080"
   frontend:
-    image: uskharlamova/abntester-frontend:latest
+    image: uskharlamova/abntester-frontend:main
     ports:
       - "4200:4200"
