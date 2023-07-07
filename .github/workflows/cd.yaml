@@ -15,20 +15,18 @@ jobs:
       - run: npm run build
         working-directory: ./abntester-frontend
       - uses: actions/upload-artifact@master
-        working-directory: ./abntester-frontend
         with:
           name: dist
-          path: dist/
+          path: abntester-frontend/dist/
   docker-frontend-push:
     needs: build-frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - uses: actions/download-artifact@master
-        working-directory: ./abntester-frontend
         with:
           name: dist
-          path: dist/
+          path: abntester-frontend/dist/
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
@@ -40,11 +38,10 @@ jobs:
         with:
           images: uskharlamova/abntester-frontend
       - name: Build and push Docker image
-        working-directory: ./abntester-frontend
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./abntester-frontend
+          file: abntester-frontend/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -64,17 +61,16 @@ jobs:
       - uses: actions/upload-artifact@master
         with:
           name: target
-          path: target/
+          path: abntester-backend/target/
   docker-backend-push:
     needs: build-backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - uses: actions/download-artifact@master
-        working-directory: ./abntester-backend
         with:
           name: target
-          path: target/
+          path: abntester-backend/target/
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
@@ -86,17 +82,16 @@ jobs:
         with:
           images: uskharlamova/abntester-backend
       - name: Build and push Docker image
-        working-directory: ./abntester-backend
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./abntester-backend
+          file: abntester-backend/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
-    needs: [ build-backend, build-frontend ]
+    needs: [ docker-backend-push, docker-frontend-push ]
     runs-on: ubuntu-latest
     env:
       CORS_ORIGINS: ${{ secrets.CORS_ORIGINS }}
