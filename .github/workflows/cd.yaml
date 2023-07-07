@@ -93,6 +93,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
+    needs: [ build-backend, build-frontend ]
     runs-on: ubuntu-latest
     env:
       CORS_ORIGINS: ${{ secrets.CORS_ORIGINS }}
