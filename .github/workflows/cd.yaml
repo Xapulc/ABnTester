@@ -108,7 +108,7 @@ jobs:
           script: |
             cd ABnTester
             git pull
-            docker pull uskharlamova/abntester-backend
-            docker pull uskharlamova/abntester-frontend
+            docker pull uskharlamova/abntester-backend:main
+            docker pull uskharlamova/abntester-frontend:main
             docker-compose stop
             docker-compose up -d
