@@ -56,7 +56,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: cd abntester-backend
+      - run: cd abntester-backend
       - name: Build with Maven
         run: mvn package
       - uses: actions/upload-artifact@master
