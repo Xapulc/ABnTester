@@ -1,4 +1,4 @@
-<div class="tui-container">
+<div>
   <form [formGroup]="form">
     <div class="tui-row">
       <div class="tui-col_8">
@@ -15,10 +15,10 @@
         </div>
         <div class="tui-form__row tui-form__row_multi-fields" *ngIf="isBinaryCase()">
           <div class="tui-form__multi-field">
-            <mde-percent-param formControlName="mdePercent"/>
+            <mde-percent-param formControlName="mdePercent" [hintContent]="getSuitableHintContent().mde"/>
           </div>
           <div class="tui-form__multi-field">
-            <probability-param formControlName="probability"/>
+            <probability-param formControlName="probability" [hintContent]="getSuitableHintContent().probability"/>
           </div>
         </div>
         <div class="tui-form__row tui-form__row_multi-fields" *ngIf="isNonBinaryCase()">

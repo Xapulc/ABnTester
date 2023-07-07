@@ -1,9 +1,20 @@
-<tui-input-number
-  [formControl]="form"
-  [tuiTextfieldPostfix]="'%'"
-  [min]="0.01"
-  [max]="99.99"
-  [precision]="2"
+<div tuiGroup>
+  <tui-input-number
+    [formControl]="form"
+    [tuiTextfieldPostfix]="'%'"
+    [min]="0.01"
+    [max]="99.99"
+    [precision]="2"
+  >
+    p<sub>0</sub> - базовая конверсия
+  </tui-input-number>
+  <button tuiIconButton type="button" class="help-button"
+          (click)="showHint()"
+          [icon]="'tuiIconHelpCircleLarge'"></button>
+</div>
+<ng-template
+  [tuiDialogOptions]="{label: 'Подсказка', size: 'm'}"
+  [(tuiDialog)]="openHint"
 >
-  p<sub>0</sub> - базовая конверсия
-</tui-input-number>
+  <div [mathjax]="hintContent"></div>
+</ng-template>

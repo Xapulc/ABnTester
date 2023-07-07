@@ -10,4 +10,6 @@ export interface HintContentModel {
 export interface HintContentParams {
   alpha: string
   beta: string
+  mde: string
+  probability: string
 }

@@ -15,5 +15,7 @@ function defaultEmptyParams(): HintContentParams {
   return {
     alpha: '',
     beta: '',
+    mde: '',
+    probability: '',
   }
 }
