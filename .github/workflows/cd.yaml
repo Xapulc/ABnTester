@@ -16,10 +16,10 @@ jobs:
         working-directory: ./abntester-frontend
       - run: npm run build
         working-directory: ./abntester-frontend
-      - run: tar -c -z -f dist.tar.gz abntester-frontend/dist/
+      - run: tar -czvf dist.tar.gz abntester-frontend/dist/
       - uses: actions/upload-artifact@master
         with:
-          name: dist.tar.gz
+          name: dist
           path: dist.tar.gz
 
   docker-frontend-push:
@@ -29,9 +29,9 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/download-artifact@master
         with:
-          name: dist.tar.gz
+          name: dist
           path: dist.tar.gz
-      - run: tar -x -z -f dist.tar.gz
+      - run: tar -xzvf dist.tar.gz
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
@@ -63,10 +63,10 @@ jobs:
       - name: Build with Maven
         working-directory: ./abntester-backend
         run: mvn package
-      - run: tar -c -z -f target.tar.gz abntester-backend/target/
+      - run: tar -czvf target.tar.gz abntester-backend/target/
       - uses: actions/upload-artifact@master
         with:
-          name: target.tar.gz
+          name: target
           path: target.tar.gz
   docker-backend-push:
     needs: build-backend
@@ -75,9 +75,9 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/download-artifact@master
         with:
-          name: target.tar.gz
+          name: target
           path: target.tar.gz
-      - run: tar -x -z -f target.tar.gz
+      - run: tar -xzvf target.tar.gz
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
