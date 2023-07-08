@@ -16,10 +16,11 @@ jobs:
         working-directory: ./abntester-frontend
       - run: npm run build
         working-directory: ./abntester-frontend
+      - run: tar -c -z -f dist.tar.gz abntester-frontend/dist/
       - uses: actions/upload-artifact@master
         with:
           name: dist
-          path: abntester-frontend/dist/
+          path: dist.tar.gz
   docker-frontend-push:
     needs: build-frontend
     runs-on: ubuntu-latest
@@ -28,7 +29,8 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: dist
-          path: abntester-frontend/dist/
+          path: dist.tar.gz
+      - run: tar -x -f dist.tar.gz -C abntester-frontend/dist/
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
@@ -60,6 +62,7 @@ jobs:
       - name: Build with Maven
         working-directory: ./abntester-backend
         run: mvn package
+      - run: tar -c -z -f target.tar.gz abntester-backend/target/
       - uses: actions/upload-artifact@master
         with:
           name: target
@@ -72,7 +75,8 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: target
-          path: abntester-backend/target/
+          path: target.tar.gz
+      - run: tar -x -f dist.tar.gz -C abntester-backend/target/
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
