@@ -31,7 +31,7 @@ jobs:
         with:
           name: dist.tar.gz
           path: dist.tar.gz
-      - run: tar -x -f dist.tar.gz
+      - run: tar -x -z -f dist.tar.gz
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
@@ -77,7 +77,7 @@ jobs:
         with:
           name: target.tar.gz
           path: target.tar.gz
-      - run: tar -x -f target.tar.gz
+      - run: tar -x -z -f target.tar.gz
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
