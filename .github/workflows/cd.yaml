@@ -19,8 +19,9 @@ jobs:
       - run: tar -c -z -f dist.tar.gz abntester-frontend/dist/
       - uses: actions/upload-artifact@master
         with:
-          name: dist
+          name: dist.tar.gz
           path: dist.tar.gz
+
   docker-frontend-push:
     needs: build-frontend
     runs-on: ubuntu-latest
@@ -28,9 +29,9 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/download-artifact@master
         with:
-          name: dist
+          name: dist.tar.gz
           path: dist.tar.gz
-      - run: tar -x -f dist.tar.gz -C abntester-frontend/dist/
+      - run: tar -x -f dist.tar.gz
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
@@ -65,8 +66,8 @@ jobs:
       - run: tar -c -z -f target.tar.gz abntester-backend/target/
       - uses: actions/upload-artifact@master
         with:
-          name: target
-          path: abntester-backend/target/
+          name: target.tar.gz
+          path: target.tar.gz
   docker-backend-push:
     needs: build-backend
     runs-on: ubuntu-latest
@@ -74,9 +75,9 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/download-artifact@master
         with:
-          name: target
+          name: target.tar.gz
           path: target.tar.gz
-      - run: tar -x -f dist.tar.gz -C abntester-backend/target/
+      - run: tar -x -f target.tar.gz
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
