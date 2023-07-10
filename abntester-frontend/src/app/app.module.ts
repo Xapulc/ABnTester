@@ -20,6 +20,7 @@ import {
   TuiFieldErrorPipeModule,
   TuiInputModule,
   TuiInputNumberModule,
+  TuiIslandModule,
   TuiRadioBlockModule,
   TuiTabsModule,
 } from '@taiga-ui/kit';
@@ -41,6 +42,7 @@ import {GlobalHttpInterceptor} from './interceptor/global-http-interceptor';
 import {of} from 'rxjs';
 import {MdeAbsComponent} from './parameters/mde-abs/mde-abs.component';
 import {MathjaxModule} from 'mathjax-angular';
+import {StandardCalculationResultComponent} from './standard-calculation-result/standard-calculation-result.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import {MathjaxModule} from 'mathjax-angular';
     ProbabilityComponent,
     VarianceComponent,
     MdeAbsComponent,
+    StandardCalculationResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,7 @@ import {MathjaxModule} from 'mathjax-angular';
     TuiLabelModule,
     MathjaxModule.forRoot(),
     TuiDialogModule,
+    TuiIslandModule,
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
     {provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptor, multi: true},

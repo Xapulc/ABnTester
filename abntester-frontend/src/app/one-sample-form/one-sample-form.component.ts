@@ -9,6 +9,11 @@ import {
 } from './one-sample-form-model';
 import {getSuitableHintContent} from '../hint-content/hint-content.utils';
 import {oneSampleHints} from './one-sample-hint-messages.model';
+import {StandardCalculationContent} from '../standard-calculation-result/standard-calculation-result.model';
+import {
+  getCalculationContent,
+  OneSampleStandardCalculationResultParams,
+} from './one-sample-calculation-result-messages.model';
 
 @Component({
   selector: 'app-one-sample-form',
@@ -19,8 +24,7 @@ export class OneSampleFormComponent {
   constructor(private oneSampleCalculationService: OneSampleCalculationService) {
   }
 
-  showResult = false
-  sampleSize: number = 0
+  lastAppliedResult: OneSampleStandardCalculationResultParams | null = null
 
   form: FormGroup = new FormGroup({
     alpha: new FormControl(5, Validators.required),
@@ -35,7 +39,7 @@ export class OneSampleFormComponent {
 
   ngOnInit(): void {
     this.form.get('type')?.valueChanges.subscribe(
-      value => {
+      (value: BinarySampleType) => {
         if (value === BinarySampleType.BINARY) {
           this.form.get('probability')?.setValidators(Validators.required)
           this.form.get('mdePercent')?.setValidators(Validators.required)
@@ -62,8 +66,7 @@ export class OneSampleFormComponent {
   }
 
   private handleResponse = (response: CalculateOneSampleResponse) => {
-    this.showResult = true
-    this.sampleSize = response.sampleSize
+    this.lastAppliedResult = this.getCalculationParams(response.sampleSize)
   }
 
   private formToNonBinaryCalcRequest(): CalculateOneSampleNonBinaryRequest {
@@ -98,4 +101,21 @@ export class OneSampleFormComponent {
     return getSuitableHintContent(this.form.get('type')?.value, this.form.get('alternative')?.value, oneSampleHints)
   }
 
+  getSuitableCalculationContent(): StandardCalculationContent {
+    return getCalculationContent(this.lastAppliedResult!);
+  }
+
+  private getCalculationParams(sampleSize: number): OneSampleStandardCalculationResultParams {
+    const type: BinarySampleType = this.form.get('type')?.value
+    const mde: number = type == BinarySampleType.BINARY ? this.form.get('mdePercent')?.value : this.form.get('mdeAbs')?.value
+    return {
+      p0: this.form.get('probability')?.value,
+      mde: mde,
+      alpha: this.form.get('alpha')?.value,
+      beta: this.form.get('beta')?.value,
+      sampleSize: sampleSize,
+      alternative: this.form.get('alternative')?.value,
+      type: this.form.get('type')?.value,
+    }
+  }
 }

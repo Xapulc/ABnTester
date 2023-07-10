@@ -1,7 +1,7 @@
-<div>
-  <form [formGroup]="form">
+<div class="form-and-result-container">
+  <form [formGroup]="form" class="tui-form form-container">
     <div class="tui-row">
-      <div class="tui-col_8">
+      <div class="tui-col_12">
         <div class="tui-form__row">
           <is-binary-radio-param formControlName="type"/>
         </div>
@@ -70,7 +70,7 @@
     </div>
 
   </form>
-  <div *ngIf="showResult">
+  <div *ngIf="showResult" class="result-container">
     <p>
       Размер первой выборки: {{leftSampleSize}}
     </p>

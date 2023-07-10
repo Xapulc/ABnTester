@@ -3,7 +3,7 @@ export interface CalculateTwoSampleBinaryRequest {
   beta: number,
   p: number,
   mde: number,
-  alternative: number,
+  alternative: string,
   leftProportion: number,
 }
 
@@ -12,7 +12,7 @@ export interface CalculateTwoSampleNonBinaryRequest {
   beta: number,
   variance: number,
   mde: number,
-  alternative: number,
+  alternative: string,
   leftProportion: number,
 }
 

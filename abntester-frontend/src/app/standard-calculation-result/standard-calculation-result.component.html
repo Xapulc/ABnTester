@@ -1,0 +1,6 @@
+<tui-island size="l" style="width: 110%">
+  <div [mathjax]="content.description"></div>
+  <tui-island style="background: aliceblue" *ngIf="content.code">
+    <pre><code>{{ content.code }}</code></pre>
+  </tui-island>
+</tui-island>

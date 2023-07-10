@@ -3,7 +3,7 @@ export interface CalculateOneSampleBinaryRequest {
   beta: number,
   p: number,
   mde: number,
-  alternative: number,
+  alternative: string,
 }
 
 export interface CalculateOneSampleNonBinaryRequest {
@@ -11,7 +11,7 @@ export interface CalculateOneSampleNonBinaryRequest {
   beta: number,
   variance: number,
   mde: number,
-  alternative: number,
+  alternative: string,
 }
 
 export interface CalculateOneSampleResponse {
