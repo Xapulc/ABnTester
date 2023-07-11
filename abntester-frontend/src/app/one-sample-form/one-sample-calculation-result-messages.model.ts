@@ -20,6 +20,10 @@ export function getCalculationContent(params: OneSampleStandardCalculationResult
       switch (params.alternative) {
         case OneTwoSidedAlternativeType.LEFT_SIDED:
           return binaryLeftSidedCalculationContent(params)
+        case OneTwoSidedAlternativeType.RIGHT_SIDED:
+          return binaryRightSidedCalculationContent(params)
+        case OneTwoSidedAlternativeType.TWO_SIDED:
+          return binaryTwoSidedCalculationContent(params)
       }
   }
   return defaultEmptyContent(params.sampleSize)
@@ -35,7 +39,7 @@ function binaryLeftSidedCalculationContent(params: OneSampleStandardCalculationR
   return {
     description: `
       <h1>Постановка задачи</h1>
-      Мы проверяем гипотезу, что на тесте конверсия $p$ не меньше $${params.p0}\\%$ против альтернативы, что конверсия $p$ меньше $${params.p0}\\%$.
+      Мы проверяем гипотезу, что на тесте конверсия $p$ не меньше $${params.p0}\\%$, против альтернативы, что конверсия $p$ меньше $${params.p0}\\%$.
       <h1>Размер выборки</h1>
       Для проведения теста нужно
       <h3><span style="font-size: 150%">${params.sampleSize}</span> клиентов</h3>
@@ -62,11 +66,97 @@ res = proportions_ztest(success_cnt,
                         p0,
                         alternative="smaller")        # Левосторонняя альтернатива
 pvalue = res[1]                                       # P-value критерия
-print(f"P-value критерия = {pvalue}")
+print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
-    print(f"Конверсия {p:%} стат. значимо ниже базовой конверсии {p0:%}")
+    print(f"Конверсия {p:%} стат. значимо ниже базовой конверсии {p0:%}.")
 else:
-    print(f"Конверсия {p:%} не стат. значимо ниже базовой конверсии {p0:%}")`,
+    print(f"Конверсия {p:%} не стат. значимо ниже базовой конверсии {p0:%}.")`,
+  }
+}
+
+
+function binaryRightSidedCalculationContent(params: OneSampleStandardCalculationResultParams): StandardCalculationContent {
+  const p0_mde = new Decimal(params.p0).plus(new Decimal(params.mde)).toNumber()
+  return {
+    description: `
+      <h1>Постановка задачи</h1>
+      Мы проверяем гипотезу, что на тесте конверсия $p$ не превосходит $${params.p0}\\%$, против альтернативы, что конверсия $p$ больше $${params.p0}\\%$.
+      <h1>Размер выборки</h1>
+      Для проведения теста нужно
+      <h3><span style="font-size: 150%">${params.sampleSize}</span> клиентов</h3>
+      При таком размере выборки:
+      <br/><br/>
+      <ul class="tui-list">
+      <li class="tui-list__item"> если реальная конверсия $p$ не больше $${params.p0}\\%$, то вероятность ошибки будет не более $${params.alpha}\\%$,</li>
+      <li class="tui-list__item"> если реальная конверсия $p$ не меньше $${p0_mde}\\%$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
+      </ul>
+      <h1>Критерий</h1>`,
+    code: `from statsmodels.stats.proportion import proportions_ztest
+
+
+success_cnt = \<количество успешных реализаций\>
+sample_size = \<размер полученной выборки\>
+
+# Базовая конверсия
+p0 = ${params.p0} / 100
+p = success_cnt / sample_size
+alpha = ${params.alpha} / 100
+
+res = proportions_ztest(success_cnt,
+                        sample_size,
+                        p0,
+                        alternative="larger")         # Правосторонняя альтернатива
+pvalue = res[1]                                       # P-value критерия
+print(f"P-value критерия = {pvalue}.")
+
+if pvalue < alpha:
+    print(f"Конверсия {p:%} стат. значимо больше базовой конверсии {p0:%}.")
+else:
+    print(f"Конверсия {p:%} не стат. значимо больше базовой конверсии {p0:%}.")`,
+  }
+}
+
+
+function binaryTwoSidedCalculationContent(params: OneSampleStandardCalculationResultParams): StandardCalculationContent {
+  return {
+    description: `
+      <h1>Постановка задачи</h1>
+      Мы проверяем гипотезу, что на тесте конверсия $p$ равна $${params.p0}\\%$, против альтернативы, что конверсия $p$ отличается от $${params.p0}\\%$.
+      <h1>Размер выборки</h1>
+      Для проведения теста нужно
+      <h3><span style="font-size: 150%">${params.sampleSize}</span> клиентов</h3>
+      При таком размере выборки:
+      <br/><br/>
+      <ul class="tui-list">
+      <li class="tui-list__item"> если реальная конверсия $p$ равна $${params.p0}\\%$, то вероятность ошибки будет не более $${params.alpha}\\%$,</li>
+      <li class="tui-list__item"> если реальная конверсия $p$ отличается от $${params.p0}\\%$ хотя бы на $${params.mde}\\%$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
+      </ul>
+      <h1>Критерий</h1>`,
+    code: `from statsmodels.stats.proportion import proportions_ztest
+
+
+success_cnt = \<количество успешных реализаций\>
+sample_size = \<размер полученной выборки\>
+
+# Базовая конверсия
+p0 = ${params.p0} / 100
+p = success_cnt / sample_size
+alpha = ${params.alpha} / 100
+
+res = proportions_ztest(success_cnt,
+                        sample_size,
+                        p0,
+                        alternative="two-sided")      # Двухсторонняя альтернатива
+pvalue = res[1]                                       # P-value критерия
+print(f"P-value критерия = {pvalue}.")
+
+if pvalue < alpha:
+    if p > p0:
+        print(f"Конверсия {p:%} стат. значимо больше базовой конверсии {p0:%}.")
+    else:
+        print(f"Конверсия {p:%} стат. значимо меньше базовой конверсии {p0:%}.")
+else:
+    print(f"Конверсия {p:%} не стат. значимо отличается базовой конверсии {p0:%}.")`,
   }
 }
