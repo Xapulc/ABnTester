@@ -10,6 +10,10 @@ import Decimal from 'decimal.js';
 import {BinarySampleType} from '../parameters/is-binary-radio/is-binary-radio.model';
 import {twoSampleHints} from './two-sample-hint-messages.model';
 import {getSuitableHintContent} from '../hint-content/hint-content.utils';
+import {
+  getCalculationContent,
+  TwoSampleStandardCalculationResultParams,
+} from './two-sample-calculation-result-messages.model';
 
 @Component({
   selector: 'app-two-sample-form',
@@ -20,9 +24,7 @@ export class TwoSampleFormComponent implements OnInit {
   constructor(private twoSampleCalculationService: TwoSampleCalculationService) {
   }
 
-  showResult = false
-  leftSampleSize: number = 0
-  rightSampleSize: number = 0
+  lastAppliedResult: TwoSampleStandardCalculationResultParams | null = null
 
   form: FormGroup = new FormGroup({
     alpha: new FormControl(5, Validators.required),
@@ -72,9 +74,27 @@ export class TwoSampleFormComponent implements OnInit {
   }
 
   private handleResponse = (response: CalculateTwoSampleResponse) => {
-    this.showResult = true
-    this.rightSampleSize = response.rightSampleSize
-    this.leftSampleSize = response.leftSampleSize
+    this.lastAppliedResult = this.getCalculationParams(response)
+  }
+
+  getSuitableCalculationContent() {
+    return getCalculationContent(this.lastAppliedResult!)
+  }
+
+  private getCalculationParams(response: CalculateTwoSampleResponse): TwoSampleStandardCalculationResultParams {
+    const type: BinarySampleType = this.form.get('type')?.value
+    const mde: number = type == BinarySampleType.BINARY ? this.form.get('mdePercent')?.value : this.form.get('mdeAbs')?.value
+    return {
+      p0: this.form.get('probability')?.value,
+      mde: mde,
+      alpha: this.form.get('alpha')?.value,
+      beta: this.form.get('beta')?.value,
+      firstSampleSize: response.leftSampleSize,
+      secondSampleSize: response.rightSampleSize,
+      alternative: this.form.get('alternative')?.value,
+      type: this.form.get('type')?.value,
+      variance: this.form.get('variance')?.value,
+    }
   }
 
   private formToNonBinaryCalcRequest(): CalculateTwoSampleNonBinaryRequest {

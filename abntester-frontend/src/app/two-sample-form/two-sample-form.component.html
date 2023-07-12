@@ -70,12 +70,7 @@
     </div>
 
   </form>
-  <div *ngIf="showResult" class="result-container">
-    <p>
-      Размер первой выборки: {{leftSampleSize}}
-    </p>
-    <p>
-      Размер второй выборки: {{rightSampleSize}}
-    </p>
-  </div>
+  <standard-calculation-result *ngIf="lastAppliedResult" class="result-container"
+                               [content]="getSuitableCalculationContent()">
+  </standard-calculation-result>
 </div>
