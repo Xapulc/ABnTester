@@ -23,10 +23,10 @@
         </div>
         <div class="tui-form__row tui-form__row_multi-fields" *ngIf="isNonBinaryCase()">
           <div class="tui-form__multi-field">
-            <mde-abs-param formControlName="mdeAbs"/>
+            <mde-abs-param formControlName="mdeAbs" [hintContent]="getSuitableHintContent().mde"/>
           </div>
           <div class="tui-form__multi-field">
-            <variance-param formControlName="variance"/>
+            <variance-param formControlName="variance" [hintContent]="getSuitableHintContent().variance"/>
           </div>
         </div>
         <div class="tui-form__row">

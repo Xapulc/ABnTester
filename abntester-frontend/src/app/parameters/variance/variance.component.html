@@ -1,7 +1,18 @@
-<tui-input-number
-  [formControl]="form"
-  [min]="0.000001"
-  [precision]="6"
+<div tuiGroup>
+  <tui-input-number
+    [formControl]="form"
+    [min]="0.000001"
+    [precision]="6"
+  >
+    Дисперсия
+  </tui-input-number>
+  <button tuiIconButton type="button" class="help-button"
+          (click)="showHint()"
+          [icon]="'tuiIconHelpCircleLarge'"></button>
+</div>
+<ng-template
+  [tuiDialogOptions]="{label: 'Подсказка', size: 'm'}"
+  [(tuiDialog)]="openHint"
 >
-  Дисперсия
-</tui-input-number>
+  <div [mathjax]="hintContent"></div>
+</ng-template>

@@ -17,5 +17,6 @@ function defaultEmptyParams(): HintContentParams {
     beta: '',
     mde: '',
     probability: '',
+    variance: '',
   }
 }

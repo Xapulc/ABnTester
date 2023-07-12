@@ -29,6 +29,7 @@ export const oneSampleHints: HintContentModel[] = [
         '<li class="tui-list__item"> оценки дисперсии в формуле размера выборки;</li> ' +
         '<li class="tui-list__item"> описания статистического критерия.</li>' +
         '</ul>',
+      variance: '',
     },
   },
   {
@@ -57,6 +58,7 @@ export const oneSampleHints: HintContentModel[] = [
         '<li class="tui-list__item">  оценки дисперсии в формуле размера выборки;</li>' +
         '<li class="tui-list__item">  описания статистического критерия.</li>' +
         '</ul>',
+      variance: '',
     },
   },
   {
@@ -85,6 +87,7 @@ export const oneSampleHints: HintContentModel[] = [
         '<li class="tui-list__item"> оценки дисперсии в формуле размера выборки;</li>' +
         '<li class="tui-list__item"> описания статистического критерия.</li>' +
         '</ul>',
+      variance: '',
     },
   },
   {
@@ -120,6 +123,7 @@ export const oneSampleHints: HintContentModel[] = [
       variance: 'Оценка дисперсии целевой метрики теста. ' +
         'Она влияет на то, с какой точностью можно оценить значение мат. ожидания метрики, ' +
         'поэтому нужно для определения размера выборки.',
+      probability: '',
     },
   },
   {
@@ -155,6 +159,7 @@ export const oneSampleHints: HintContentModel[] = [
       variance: 'Оценка дисперсии целевой метрики теста. ' +
         'Она влияет на то, с какой точностью можно оценить значение мат. ожидания метрики, ' +
         'поэтому нужно для определения размера выборки.',
+      probability: '',
     },
   },
   {
@@ -190,6 +195,7 @@ export const oneSampleHints: HintContentModel[] = [
       variance: 'Оценка дисперсии целевой метрики теста. ' +
         'Она влияет на то, с какой точностью можно оценить значение мат. ожидания метрики, ' +
         'поэтому нужно для определения размера выборки.',
+      probability: '',
     },
   },
 ]

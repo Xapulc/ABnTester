@@ -12,4 +12,5 @@ export interface HintContentParams {
   beta: string
   mde: string
   probability: string
+  variance: string
 }
