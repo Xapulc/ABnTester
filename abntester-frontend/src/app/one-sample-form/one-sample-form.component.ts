@@ -116,6 +116,7 @@ export class OneSampleFormComponent {
       sampleSize: sampleSize,
       alternative: this.form.get('alternative')?.value,
       type: this.form.get('type')?.value,
+      variance: this.form.get('variance')?.value,
     }
   }
 }

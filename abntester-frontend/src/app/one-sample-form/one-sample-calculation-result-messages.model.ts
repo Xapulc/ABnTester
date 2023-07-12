@@ -7,6 +7,7 @@ import Decimal from 'decimal.js';
 export interface OneSampleStandardCalculationResultParams {
   p0: number,
   mde: number,
+  variance: number,
   alpha: number,
   beta: number,
   sampleSize: number,
@@ -24,6 +25,11 @@ export function getCalculationContent(params: OneSampleStandardCalculationResult
           return binaryRightSidedCalculationContent(params)
         case OneTwoSidedAlternativeType.TWO_SIDED:
           return binaryTwoSidedCalculationContent(params)
+      }
+    case BinarySampleType.NON_BINARY:
+      switch (params.alternative) {
+        case OneTwoSidedAlternativeType.LEFT_SIDED:
+          return nonBinaryLeftSidedCalculationContent(params)
       }
   }
   return defaultEmptyContent(params.sampleSize)
@@ -158,5 +164,45 @@ if pvalue < alpha:
         print(f"Конверсия {p:%} стат. значимо меньше базовой конверсии {p0:%}.")
 else:
     print(f"Конверсия {p:%} не стат. значимо отличается базовой конверсии {p0:%}.")`,
+  }
+}
+
+
+function nonBinaryLeftSidedCalculationContent(params: OneSampleStandardCalculationResultParams): StandardCalculationContent {
+  return {
+    description: `
+      <h1>Постановка задачи</h1>
+      Пусть $\\mu_0$ - целевое значение, с которым мы хотим сравнить $\\mu$ - мат. ожидание целевой метрики теста.
+      Мы проверяем гипотезу $\\mu \\geq \\mu_0$ против альтернативы $\\mu \< \\mu_0$.
+      <h1>Размер выборки</h1>
+      Для проведения теста нужно
+      <h3><span style="font-size: 150%">${params.sampleSize}</span> клиентов</h3>
+      При таком размере выборки:
+      <br/><br/>
+      <ul class="tui-list">
+      <li class="tui-list__item"> если мат. ожидание $\\mu$ не меньше целевого значения $\\mu_0$, то вероятность ошибки будет не более $${params.alpha}\\%$,</li>
+      <li class="tui-list__item"> если мат. ожидание $\\mu$ не больше $$\\mu_0 - \\text{MDE}$ и дисперсия метрики не превышает $${params.variance}$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
+      </ul>
+      <h1>Критерий</h1>`,
+    code: `import numpy as np
+
+from statsmodels.stats.weightstats import ztest
+
+
+sample = \<значения целевой метрики на выборке клиентов\>
+mu0 =    \<целевое значение метрики\>
+mu = np.mean(sample)
+alpha = ${params.alpha} / 100
+
+res = ztest(sample,
+            value=mu0,
+            alternative="smaller")                  # Левосторонняя альтернатива
+pvalue = res[1]                                     # P-value критерия
+print(f"P-value критерия = {pvalue}.")
+
+if pvalue < alpha:
+    print(f"Среднее метрики {mu} стат. значимо ниже значения {mu0}.")
+else:
+    print(f"Среднее метрики {mu} не стат. значимо ниже значения {mu0}.")`,
   }
 }
