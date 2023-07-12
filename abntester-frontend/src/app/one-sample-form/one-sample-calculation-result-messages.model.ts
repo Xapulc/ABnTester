@@ -32,6 +32,8 @@ export function getCalculationContent(params: OneSampleStandardCalculationResult
           return nonBinaryLeftSidedCalculationContent(params)
         case OneTwoSidedAlternativeType.RIGHT_SIDED:
           return nonBinaryRightSidedCalculationContent(params)
+        case OneTwoSidedAlternativeType.TWO_SIDED:
+          return nonBinaryTwoSidedCalculationContent(params)
       }
   }
   return defaultEmptyContent(params.sampleSize)
@@ -155,7 +157,7 @@ alpha = ${params.alpha} / 100
 res = proportions_ztest(success_cnt,
                         sample_size,
                         p0,
-                        alternative="two-sided")      # Двухсторонняя альтернатива
+                        alternative="two-sided")      # Двусторонняя альтернатива
 pvalue = res[1]                                       # P-value критерия
 print(f"P-value критерия = {pvalue}.")
 
@@ -246,5 +248,48 @@ if pvalue < alpha:
     print(f"Среднее метрики {mu} стат. значимо выше значения {mu0}.")
 else:
     print(f"Среднее метрики {mu} не стат. значимо выше значения {mu0}.")`,
+  }
+}
+
+
+function nonBinaryTwoSidedCalculationContent(params: OneSampleStandardCalculationResultParams): StandardCalculationContent {
+  return {
+    description: `
+      <h1>Постановка задачи</h1>
+      Пусть $\\mu_0$ - целевое значение, с которым мы хотим сравнить $\\mu$ - мат. ожидание целевой метрики теста.
+      Мы проверяем гипотезу $\\mu = \\mu_0$ против альтернативы $\\mu \\neq \\mu_0$.
+      <h1>Размер выборки</h1>
+      Для проведения теста нужно
+      <h3><span style="font-size: 150%">${params.sampleSize}</span> клиентов</h3>
+      При таком размере выборки:
+      <br/><br/>
+      <ul class="tui-list">
+      <li class="tui-list__item"> если мат. ожидание $\\mu$ совпадает с целевым значением $\\mu_0$, то вероятность ошибки будет не более $${params.alpha}\\%$,</li>
+      <li class="tui-list__item"> если мат. ожидание $\\mu$ отличается от $\\mu_0$ как минимум на $\\text{MDE}$ и дисперсия метрики не превышает $${params.variance}$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
+      </ul>
+      <h1>Критерий</h1>`,
+    code: `import numpy as np
+
+from statsmodels.stats.weightstats import ztest
+
+
+sample = \<значения целевой метрики на выборке клиентов\>
+mu0 =    \<целевое значение метрики\>
+mu = np.mean(sample)
+alpha = ${params.alpha} / 100
+
+res = ztest(sample,
+            value=mu0,
+            alternative="two-sided")                # Двусторонняя альтернатива
+pvalue = res[1]                                     # P-value критерия
+print(f"P-value критерия = {pvalue}.")
+
+if pvalue < alpha:
+    if mu > mu0:
+        print(f"Среднее метрики {mu} стат. значимо выше значения {mu0}.")
+    else:
+        print(f"Среднее метрики {mu} стат. значимо ниже значения {mu0}.")
+else:
+    print(f"Среднее метрики {mu} не стат. значимо отличается от значения {mu0}.")`,
   }
 }
