@@ -50,8 +50,46 @@ export function defaultEmptyContent(firstSampleSize: number, secondSampleSize: n
 
 function binaryLeftSidedCalculationContent(params: TwoSampleStandardCalculationResultParams): StandardCalculationContent {
   return {
-    description: `Размер первой выборки: ${params.firstSampleSize}</br>Размер второй выборки:${params.secondSampleSize}`,
-    code: ``,
+    description: `
+      <h1>Постановка задачи</h1>
+      Пусть $p_1$ - вероятность успеха на первой выборке, $p_2$ - вероятность успеха на второй выборке.
+      Мы проверяем гипотезу $p_1 \\leq p_2$ против альтернативы $p_1 \> p_2$.
+      <h1>Размер выборки</h1>
+      Для проведения теста нужно
+      <h3><span style="font-size: 150%">${params.firstSampleSize}</span> клиентов на первую выборку,
+      <span style="font-size: 150%">${params.secondSampleSize}</span> клиентов на вторую выборку</h3>
+      При таком размере выборки:
+      <br/><br/>
+      <ul class="tui-list">
+      <li class="tui-list__item"> если вероятность $p_1$ не больше $p_2$, то вероятность ошибки будет не более $${params.alpha}\\%$,</li>
+      <li class="tui-list__item"> если вероятность $p_1$ не меньше $$p_2 + \\text{MDE}$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
+      </ul>
+      <h1>Критерий</h1>`,
+    code: `from statsmodels.stats.proportion import proportions_ztest
+
+
+first_success_cnt =  <количество успешных реализаций в первой выборке>
+first_sample_size =  <размер первой выборки>
+first_conv = first_success_cnt / first_sample_size
+
+second_success_cnt = <количество успешных реализаций во второй выборке>
+second_sample_size = <размер второй выборки>
+second_conv = second_success_cnt / second_sample_size
+
+alpha = ${params.alpha} / 100
+
+res = proportions_ztest([first_success_cnt, second_success_cnt],
+                        [first_sample_size, second_sample_size],
+                        alternative="larger")                                     # Левосторонняя альтернатива
+pvalue = res[1]                                                                   # P-value критерия
+print(f"P-value критерия = {pvalue}.")
+
+if pvalue < alpha:
+    print(f"Конверсия {first_conv:%} на первой выборке стат. значимо больше "
+          + f"конверсии {second_conv:%} на второй выборке.")
+else:
+    print(f"Конверсия {first_conv:%} на первой выборке не стат. значимо больше "
+          + f"конверсии {second_conv:%} на второй выборке.")`,
   }
 }
 
