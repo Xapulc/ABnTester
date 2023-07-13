@@ -191,23 +191,137 @@ else:
 
 function nonBinaryLeftSidedCalculationContent(params: TwoSampleStandardCalculationResultParams): StandardCalculationContent {
   return {
-    description: `Размер первой выборки: ${params.firstSampleSize}</br>Размер второй выборки:${params.secondSampleSize}`,
-    code: ``,
+    description: `
+      <h1>Постановка задачи</h1>
+      Пусть $\\mu_1$ - мат. ожидание целевой метрики теста в первой вариации, $\\mu_2$ - мат. ожидание во второй вариации.
+      Мы проверяем гипотезу $\\mu_1 \\leq \\mu_2$ против альтернативы $\\mu_1 \> \\mu_2$.
+      <h1>Размер выборки</h1>
+      Для проведения теста нужно
+      <h3><span style="font-size: 150%">${params.firstSampleSize}</span> клиентов на первую выборку,
+      <span style="font-size: 150%">${params.secondSampleSize}</span> клиентов на вторую выборку</h3>
+      При таком размере выборки:
+      <br/><br/>
+      <ul class="tui-list">
+      <li class="tui-list__item"> если мат. ожидание $\\mu_1$ не больше $\\mu_2$, то вероятность ошибки будет не более $${params.alpha}\\%$,</li>
+      <li class="tui-list__item"> если мат. ожидание $\\mu_1$ не меньше $\\mu_2 + \\text{MDE}$ и дисперсия метрик не превышает $${params.variance}$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
+      </ul>
+      <h1>Критерий</h1>`,
+    code: `from scipy.stats import ttest_ind
+
+
+first_sample =  <значения целевой метрики теста в первой вариации>
+first_mean = np.mean(first_sample)
+
+second_sample = <значения целевой метрики теста во второй вариации>
+second_mean = np.mean(second_sample)
+
+alpha = ${params.alpha} / 100
+
+res = ttest_ind(first_sample,
+                second_sample,
+                equal_var=False,                                                      # Убираем предположение об одинаковости дисперсий метрик в обоих вариаций
+                alternative="greater")                                                # Левосторонняя альтернатива
+pvalue = res.pvalue                                                                   # P-value критерия
+print(f"P-value критерия = {pvalue}.")
+
+if pvalue < alpha:
+    print(f"Среднее {first_mean} метрики на первой выборке стат. значимо больше "
+          + f"среднего {second_mean} на второй выборке.")
+else:
+    print(f"Среднее {first_mean} метрики на первой выборке не стат. значимо больше "
+          + f"среднего {second_mean} на второй выборке.")`,
   }
 }
 
 
 function nonBinaryRightSidedCalculationContent(params: TwoSampleStandardCalculationResultParams): StandardCalculationContent {
   return {
-    description: `Размер первой выборки: ${params.firstSampleSize}</br>Размер второй выборки:${params.secondSampleSize}`,
-    code: ``,
+    description: `
+      <h1>Постановка задачи</h1>
+      Пусть $\\mu_1$ - мат. ожидание целевой метрики теста в первой вариации, $\\mu_2$ - мат. ожидание во второй вариации.
+      Мы проверяем гипотезу $\\mu_1 \\geq \\mu_2$ против альтернативы $\\mu_1 \< \\mu_2$.
+      <h1>Размер выборки</h1>
+      Для проведения теста нужно
+      <h3><span style="font-size: 150%">${params.firstSampleSize}</span> клиентов на первую выборку,
+      <span style="font-size: 150%">${params.secondSampleSize}</span> клиентов на вторую выборку</h3>
+      При таком размере выборки:
+      <br/><br/>
+      <ul class="tui-list">
+      <li class="tui-list__item"> если мат. ожидание $\\mu_1$ не меньше $\\mu_2$, то вероятность ошибки будет не более $${params.alpha}\\%$,</li>
+      <li class="tui-list__item"> если мат. ожидание $\\mu_1$ не больше $\\mu_2 - \\text{MDE}$ и дисперсия метрик не превышает $${params.variance}$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
+      </ul>
+      <h1>Критерий</h1>`,
+    code: `from scipy.stats import ttest_ind
+
+
+first_sample =  <значения целевой метрики теста в первой вариации>
+first_mean = np.mean(first_sample)
+
+second_sample = <значения целевой метрики теста во второй вариации>
+second_mean = np.mean(second_sample)
+
+alpha = ${params.alpha} / 100
+
+res = ttest_ind(first_sample,
+                second_sample,
+                equal_var=False,                                                      # Убираем предположение об одинаковости дисперсий метрик в обоих вариаций
+                alternative="less")                                                   # Правосторонняя альтернатива
+pvalue = res.pvalue                                                                   # P-value критерия
+print(f"P-value критерия = {pvalue}.")
+
+if pvalue < alpha:
+    print(f"Среднее {first_mean} метрики на первой выборке стат. значимо меньше "
+          + f"среднего {second_mean} на второй выборке.")
+else:
+    print(f"Среднее {first_mean} метрики на первой выборке не стат. значимо меньше "
+          + f"среднего {second_mean} на второй выборке.")`,
   }
 }
 
 
 function nonBinaryTwoSidedCalculationContent(params: TwoSampleStandardCalculationResultParams): StandardCalculationContent {
   return {
-    description: `Размер первой выборки: ${params.firstSampleSize}</br>Размер второй выборки:${params.secondSampleSize}`,
-    code: ``,
+    description: `
+      <h1>Постановка задачи</h1>
+      Пусть $\\mu_1$ - мат. ожидание целевой метрики теста в первой вариации, $\\mu_2$ - мат. ожидание во второй вариации.
+      Мы проверяем гипотезу $\\mu_1 = \\mu_2$ против альтернативы $\\mu_1 \\neq \\mu_2$.
+      <h1>Размер выборки</h1>
+      Для проведения теста нужно
+      <h3><span style="font-size: 150%">${params.firstSampleSize}</span> клиентов на первую выборку,
+      <span style="font-size: 150%">${params.secondSampleSize}</span> клиентов на вторую выборку</h3>
+      При таком размере выборки:
+      <br/><br/>
+      <ul class="tui-list">
+      <li class="tui-list__item"> если мат. ожидания $\\mu_1$ и $\\mu_2$ совпадают, то вероятность ошибки будет не более $${params.alpha}\\%$,</li>
+      <li class="tui-list__item"> если мат. ожидания $\\mu_1$ и $\\mu_2$ различаются хотя бы на MDE и дисперсия метрик не превышает $${params.variance}$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
+      </ul>
+      <h1>Критерий</h1>`,
+    code: `from scipy.stats import ttest_ind
+
+
+first_sample =  <значения целевой метрики теста в первой вариации>
+first_mean = np.mean(first_sample)
+
+second_sample = <значения целевой метрики теста во второй вариации>
+second_mean = np.mean(second_sample)
+
+alpha = ${params.alpha} / 100
+
+res = ttest_ind(first_sample,
+                second_sample,
+                equal_var=False,                                                      # Убираем предположение об одинаковости дисперсий метрик в обоих вариаций
+                alternative="two-sided")                                              # Двусторонняя альтернатива
+pvalue = res.pvalue                                                                   # P-value критерия
+print(f"P-value критерия = {pvalue}.")
+
+if pvalue < alpha:
+    if first_mean > second_mean:
+        print(f"Среднее {first_mean} метрики на первой выборке стат. значимо больше ")
+              + f"среднего {second_mean} на второй выборке.")
+    else:
+        print(f"Среднее {first_mean} метрики на первой выборке стат. значимо меньше ")
+              + f"среднего {second_mean} на второй выборке.")
+else:
+    print(f"Различие между средними {first_mean} и {second_mean} не является стат. значимым.")`,
   }
 }
