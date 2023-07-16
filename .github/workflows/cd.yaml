@@ -5,23 +5,23 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  build-frontend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18.16.1'
-      - run: npm install --legacy-peer-deps
-        working-directory: ./abntester-frontend
-      - run: npm run build
-        working-directory: ./abntester-frontend
-      - uses: actions/upload-artifact@master
-        with:
-          name: dist
-          path: abntester-frontend/dist/
+#  build-frontend:
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - uses: actions/checkout@v3
+  #      - uses: actions/setup-node@v3
+  #        with:
+  #          node-version: '18.16.1'
+  #      - run: npm install --legacy-peer-deps
+  #        working-directory: ./abntester-frontend
+  #      - run: npm run build
+  #        working-directory: ./abntester-frontend
+  #      - uses: actions/upload-artifact@master
+  #        with:
+  #          name: dist
+  #          path: abntester-frontend/dist/
   docker-frontend-push:
-    needs: build-frontend
+    #    needs: build-frontend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
