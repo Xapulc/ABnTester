@@ -43,6 +43,7 @@ import {of} from 'rxjs';
 import {MdeAbsComponent} from './parameters/mde-abs/mde-abs.component';
 import {MathjaxModule} from 'mathjax-angular';
 import {StandardCalculationResultComponent} from './standard-calculation-result/standard-calculation-result.component';
+import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
 
 @NgModule({
   declarations: [
@@ -83,12 +84,20 @@ import {StandardCalculationResultComponent} from './standard-calculation-result/
     MathjaxModule.forRoot(),
     TuiDialogModule,
     TuiIslandModule,
+    HighlightModule,
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
     {provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptor, multi: true},
     {
       provide: TUI_LANGUAGE,
       useValue: of(TUI_RUSSIAN_LANGUAGE),
+    },
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        fullLibraryLoader: () => import('highlight.js'),
+        lineNumbers: true,
+      },
     },
   ],
   bootstrap: [AppComponent],
