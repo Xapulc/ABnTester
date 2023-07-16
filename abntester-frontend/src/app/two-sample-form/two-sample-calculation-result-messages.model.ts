@@ -78,10 +78,11 @@ second_conv = second_success_cnt / second_sample_size
 
 alpha = ${params.alpha} / 100
 
+# Используем критерий с левосторонней альтернативой
 res = proportions_ztest([first_success_cnt, second_success_cnt],
                         [first_sample_size, second_sample_size],
-                        alternative="larger")                                     # Левосторонняя альтернатива
-pvalue = res[1]                                                                   # P-value критерия
+                        alternative="larger")
+pvalue = res[1]
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -124,10 +125,11 @@ second_conv = second_success_cnt / second_sample_size
 
 alpha = ${params.alpha} / 100
 
+# Используем критерий с правосторонней альтернативой
 res = proportions_ztest([first_success_cnt, second_success_cnt],
                         [first_sample_size, second_sample_size],
-                        alternative="smaller")                                    # Правосторонняя альтернатива
-pvalue = res[1]                                                                   # P-value критерия
+                        alternative="smaller")
+pvalue = res[1]
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -170,10 +172,11 @@ second_conv = second_success_cnt / second_sample_size
 
 alpha = ${params.alpha} / 100
 
+# Используем критерий с двусторонней альтернативой
 res = proportions_ztest([first_success_cnt, second_success_cnt],
                         [first_sample_size, second_sample_size],
-                        alternative="two-sided")                                  # Двусторонняя альтернатива
-pvalue = res[1]                                                                   # P-value критерия
+                        alternative="two-sided")
+pvalue = res[1]
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -217,11 +220,13 @@ second_mean = np.mean(second_sample)
 
 alpha = ${params.alpha} / 100
 
+# Убираем предположение об одинаковости дисперсий в выборках
+# Используем критерий с левосторонней альтернативой
 res = ttest_ind(first_sample,
                 second_sample,
-                equal_var=False,                                                      # Убираем предположение об одинаковости дисперсий метрик в обоих вариаций
-                alternative="greater")                                                # Левосторонняя альтернатива
-pvalue = res.pvalue                                                                   # P-value критерия
+                equal_var=False,
+                alternative="greater")
+pvalue = res.pvalue
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -262,11 +267,13 @@ second_mean = np.mean(second_sample)
 
 alpha = ${params.alpha} / 100
 
+# Убираем предположение об одинаковости дисперсий в выборках
+# Используем критерий с правосторонней альтернативой
 res = ttest_ind(first_sample,
                 second_sample,
-                equal_var=False,                                                      # Убираем предположение об одинаковости дисперсий метрик в обоих вариаций
-                alternative="less")                                                   # Правосторонняя альтернатива
-pvalue = res.pvalue                                                                   # P-value критерия
+                equal_var=False,
+                alternative="less")
+pvalue = res.pvalue
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -307,11 +314,13 @@ second_mean = np.mean(second_sample)
 
 alpha = ${params.alpha} / 100
 
+# Убираем предположение об одинаковости дисперсий в выборках
+# Используем критерий с двусторонней альтернативой
 res = ttest_ind(first_sample,
                 second_sample,
-                equal_var=False,                                                      # Убираем предположение об одинаковости дисперсий метрик в обоих вариаций
-                alternative="two-sided")                                              # Двусторонняя альтернатива
-pvalue = res.pvalue                                                                   # P-value критерия
+                equal_var=False,
+                alternative="two-sided")
+pvalue = res.pvalue
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:

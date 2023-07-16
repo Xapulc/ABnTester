@@ -71,11 +71,12 @@ p0 = ${params.p0} / 100
 p = success_cnt / sample_size
 alpha = ${params.alpha} / 100
 
+# Используем критерий с левосторонней альтернативой
 res = proportions_ztest(success_cnt,
                         sample_size,
                         p0,
-                        alternative="smaller")        # Левосторонняя альтернатива
-pvalue = res[1]                                       # P-value критерия
+                        alternative="smaller")
+pvalue = res[1]
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -113,11 +114,12 @@ p0 = ${params.p0} / 100
 p = success_cnt / sample_size
 alpha = ${params.alpha} / 100
 
+# Используем критерий с правосторонней альтернативой
 res = proportions_ztest(success_cnt,
                         sample_size,
                         p0,
-                        alternative="larger")         # Правосторонняя альтернатива
-pvalue = res[1]                                       # P-value критерия
+                        alternative="larger")
+pvalue = res[1]
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -154,11 +156,12 @@ p0 = ${params.p0} / 100
 p = success_cnt / sample_size
 alpha = ${params.alpha} / 100
 
+# Используем критерий с двусторонней альтернативой
 res = proportions_ztest(success_cnt,
                         sample_size,
                         p0,
-                        alternative="two-sided")      # Двусторонняя альтернатива
-pvalue = res[1]                                       # P-value критерия
+                        alternative="two-sided")
+pvalue = res[1]
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -198,10 +201,11 @@ mu0 =    \<целевое значение метрики\>
 mu = np.mean(sample)
 alpha = ${params.alpha} / 100
 
+# Используем критерий с левосторонней альтернативой
 res = ztest(sample,
             value=mu0,
-            alternative="smaller")                  # Левосторонняя альтернатива
-pvalue = res[1]                                     # P-value критерия
+            alternative="smaller")
+pvalue = res[1]
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -238,10 +242,11 @@ mu0 =    \<целевое значение метрики\>
 mu = np.mean(sample)
 alpha = ${params.alpha} / 100
 
+# Используем критерий с правосторонней альтернативой
 res = ztest(sample,
             value=mu0,
-            alternative="larger")                   # Правосторонняя альтернатива
-pvalue = res[1]                                     # P-value критерия
+            alternative="larger")
+pvalue = res[1]
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -278,10 +283,11 @@ mu0 =    \<целевое значение метрики\>
 mu = np.mean(sample)
 alpha = ${params.alpha} / 100
 
+# Используем критерий с двусторонней альтернативой
 res = ztest(sample,
             value=mu0,
-            alternative="two-sided")                # Двусторонняя альтернатива
-pvalue = res[1]                                     # P-value критерия
+            alternative="two-sided")
+pvalue = res[1]
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
