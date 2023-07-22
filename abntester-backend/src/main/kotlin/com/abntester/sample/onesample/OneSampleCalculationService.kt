@@ -8,6 +8,7 @@ import com.abntester.utils.div
 import com.abntester.utils.max
 import com.abntester.utils.minus
 import java.math.BigDecimal
+import java.math.RoundingMode
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
@@ -16,7 +17,7 @@ class OneSampleCalculationService constructor(private val generalSampleSizeCalcu
     fun calcBinarySampleSize(request: OneSampleBinaryCalculationRequest): OneSampleCalculationResponse {
         val result: GeneralSampleSizeCalculationResult =
             generalSampleSizeCalculationService.calcSampleSize(request.toCalcParams())
-        return OneSampleCalculationResponse(result.sampleSize.toInt())
+        return OneSampleCalculationResponse(result.sampleSize.setScale(0, RoundingMode.CEILING).toInt())
     }
 
     private fun OneSampleBinaryCalculationRequest.toCalcParams() = GeneralSampleSizeCalculationParams(
@@ -50,7 +51,7 @@ class OneSampleCalculationService constructor(private val generalSampleSizeCalcu
     fun calcNonBinarySampleSize(request: OneSampleNonBinaryCalculationRequest): OneSampleCalculationResponse {
         val result: GeneralSampleSizeCalculationResult =
             generalSampleSizeCalculationService.calcSampleSize(request.toCalcParams())
-        return OneSampleCalculationResponse(result.sampleSize.toInt())
+        return OneSampleCalculationResponse(result.sampleSize.setScale(0, RoundingMode.CEILING).toInt())
     }
 
     private fun OneSampleNonBinaryCalculationRequest.toCalcParams() = GeneralSampleSizeCalculationParams(

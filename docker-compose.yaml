@@ -8,4 +8,4 @@ services:
   frontend:
     image: uskharlamova/abntester-frontend:main
     ports:
-      - "4200:4200"
+      - "443:4200"

@@ -17,6 +17,6 @@ import {
 })
 export class MdePercentComponent extends DefaultFormControlValueAccessorComponent {
 
-  form = new FormControl(1.5, Validators.required)
+  form = new FormControl(1, Validators.required)
 
 }

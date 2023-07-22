@@ -29,7 +29,7 @@ export class OneSampleFormComponent {
   form: FormGroup = new FormGroup({
     alpha: new FormControl(5, Validators.required),
     beta: new FormControl(20, Validators.required),
-    mdePercent: new FormControl(1.5, Validators.required),
+    mdePercent: new FormControl(1, Validators.required),
     mdeAbs: new FormControl(1),
     probability: new FormControl(10, Validators.required),
     variance: new FormControl(100),

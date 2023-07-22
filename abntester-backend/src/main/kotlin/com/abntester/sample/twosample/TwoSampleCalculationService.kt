@@ -8,6 +8,7 @@ import com.abntester.utils.div
 import com.abntester.utils.max
 import com.abntester.utils.minus
 import java.math.BigDecimal
+import java.math.RoundingMode
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
@@ -64,7 +65,10 @@ class TwoSampleCalculationService constructor(private val generalSampleSizeCalcu
     private fun GeneralSampleSizeCalculationResult.splitProportionally(leftProportion: BigDecimal): TwoSampleCalculationResponse {
         val left = sampleSize / (1 - leftProportion / 100)
         val right = sampleSize / (leftProportion / 100)
-        return TwoSampleCalculationResponse(left.toInt(), right.toInt())
+        return TwoSampleCalculationResponse(
+            left.setScale(0, RoundingMode.CEILING).toInt(),
+            right.setScale(0, RoundingMode.CEILING).toInt()
+        )
     }
 
 }
