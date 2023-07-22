@@ -7,6 +7,8 @@ services:
       - "8080:8080"
   frontend:
     image: uskharlamova/abntester-frontend:main
+    volumes:
+      - /etc/ssl:/etc/ssl
     ports:
-      - "443:4200"
-      - "80:4200"
+      - "443:443"
+      - "80:80"
