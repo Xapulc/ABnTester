@@ -29,8 +29,7 @@ export class OneSampleFormComponent {
   form: FormGroup = new FormGroup({
     alpha: new FormControl(5, Validators.required),
     beta: new FormControl(20, Validators.required),
-    mdePercent: new FormControl(1, Validators.required),
-    mdeAbs: new FormControl(1),
+    mde: new FormControl(1, Validators.required),
     probability: new FormControl(10, Validators.required),
     variance: new FormControl(100),
     alternative: new FormControl('RIGHT_SIDED', Validators.required),
@@ -42,15 +41,11 @@ export class OneSampleFormComponent {
       (value: BinarySampleType) => {
         if (value === BinarySampleType.BINARY) {
           this.form.get('probability')?.setValidators(Validators.required)
-          this.form.get('mdePercent')?.setValidators(Validators.required)
           this.form.get('variance')?.clearValidators()
-          this.form.get('mdeAbs')?.clearValidators()
         }
         if (value === BinarySampleType.NON_BINARY) {
           this.form.get('variance')?.setValidators(Validators.required)
-          this.form.get('mdeAbs')?.setValidators(Validators.required)
           this.form.get('probability')?.clearValidators()
-          this.form.get('mdePercent')?.clearValidators()
         }
       },
     )
@@ -74,7 +69,7 @@ export class OneSampleFormComponent {
       alpha: this.form.get('alpha')?.value,
       beta: this.form.get('beta')?.value,
       variance: this.form.get('variance')?.value,
-      mde: this.form.get('mdeAbs')?.value,
+      mde: this.form.get('mde')?.value,
       alternative: this.form.get('alternative')?.value,
     }
   }
@@ -84,7 +79,7 @@ export class OneSampleFormComponent {
       alpha: this.form.get('alpha')?.value,
       beta: this.form.get('beta')?.value,
       p: this.form.get('probability')?.value,
-      mde: this.form.get('mdePercent')?.value,
+      mde: this.form.get('mde')?.value,
       alternative: this.form.get('alternative')?.value,
     }
   }
@@ -107,10 +102,9 @@ export class OneSampleFormComponent {
 
   private getCalculationParams(sampleSize: number): OneSampleStandardCalculationResultParams {
     const type: BinarySampleType = this.form.get('type')?.value
-    const mde: number = type == BinarySampleType.BINARY ? this.form.get('mdePercent')?.value : this.form.get('mdeAbs')?.value
     return {
       p0: this.form.get('probability')?.value,
-      mde: mde,
+      mde: this.form.get('mde')?.value,
       alpha: this.form.get('alpha')?.value,
       beta: this.form.get('beta')?.value,
       sampleSize: sampleSize,

@@ -13,19 +13,14 @@
                       [hintContent]="getSuitableHintContent().beta"
                       class="tui-form__multi-field"/>
         </div>
-        <div class="tui-form__row tui-form__row_multi-fields" *ngIf="isBinaryCase()">
+        <div class="tui-form__row tui-form__row_multi-fields">
           <div class="tui-form__multi-field">
-            <mde-percent-param formControlName="mdePercent" [hintContent]="getSuitableHintContent().mde"/>
+            <mde-param formControlName="mde" [hintContent]="getSuitableHintContent().mde" [isPercent]="isBinaryCase()"/>
           </div>
-          <div class="tui-form__multi-field">
+          <div class="tui-form__multi-field" *ngIf="isBinaryCase()">
             <probability-param formControlName="probability" [hintContent]="getSuitableHintContent().probability"/>
           </div>
-        </div>
-        <div class="tui-form__row tui-form__row_multi-fields" *ngIf="isNonBinaryCase()">
-          <div class="tui-form__multi-field">
-            <mde-abs-param formControlName="mdeAbs" [hintContent]="getSuitableHintContent().mde"/>
-          </div>
-          <div class="tui-form__multi-field">
+          <div class="tui-form__multi-field" *ngIf="isNonBinaryCase()">
             <variance-param formControlName="variance" [hintContent]="getSuitableHintContent().variance"/>
           </div>
         </div>
