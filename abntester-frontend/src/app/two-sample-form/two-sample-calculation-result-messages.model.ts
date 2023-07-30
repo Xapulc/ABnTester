@@ -1,7 +1,6 @@
 import {StandardCalculationContent} from '../standard-calculation-result/standard-calculation-result.model';
 import {OneTwoSidedAlternativeType} from '../parameters/one-two-sided-alternative/one-two-sided-alternative.model';
 import {BinarySampleType} from '../parameters/is-binary-radio/is-binary-radio.model';
-import Decimal from 'decimal.js';
 
 
 export interface TwoSampleStandardCalculationResultParams {

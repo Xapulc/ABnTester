@@ -18,7 +18,7 @@
             <mde-param formControlName="mde" [hintContent]="getSuitableHintContent().mde" [isPercent]="isBinaryCase()"/>
           </div>
           <div class="tui-form__multi-field" *ngIf="isBinaryCase()">
-            <probability-param formControlName="probability" [hintContent]="getSuitableHintContent().probability"/>
+            <probability-param formControlName="p" [hintContent]="getSuitableHintContent().probability"/>
           </div>
           <div class="tui-form__multi-field" *ngIf="isNonBinaryCase()">
             <variance-param formControlName="variance" [hintContent]="getSuitableHintContent().variance"/>
@@ -30,7 +30,7 @@
         <div class="tui-form__row tui-form__row_multi-fields">
           <div class="tui-form__multi-field">
             <tui-input-number
-              formControlName="firstSampleProportion"
+              formControlName="leftProportion"
               [tuiTextfieldPostfix]="'%'"
               [min]="0.01"
               [max]="99.99"
@@ -41,7 +41,7 @@
           </div>
           <div class="tui-form__multi-field">
             <tui-input-number
-              formControlName="secondSampleProportion"
+              formControlName="rightProportion"
               [tuiTextfieldPostfix]="'%'"
             >
               Доля второй выборки

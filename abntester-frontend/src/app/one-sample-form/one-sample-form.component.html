@@ -18,7 +18,7 @@
             <mde-param formControlName="mde" [hintContent]="getSuitableHintContent().mde" [isPercent]="isBinaryCase()"/>
           </div>
           <div class="tui-form__multi-field" *ngIf="isBinaryCase()">
-            <probability-param formControlName="probability" [hintContent]="getSuitableHintContent().probability"/>
+            <probability-param formControlName="p" [hintContent]="getSuitableHintContent().probability"/>
           </div>
           <div class="tui-form__multi-field" *ngIf="isNonBinaryCase()">
             <variance-param formControlName="variance" [hintContent]="getSuitableHintContent().variance"/>
