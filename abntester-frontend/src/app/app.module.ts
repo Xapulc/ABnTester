@@ -43,6 +43,7 @@ import {MathjaxModule} from 'mathjax-angular';
 import {StandardCalculationResultComponent} from './standard-calculation-result/standard-calculation-result.component';
 import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
 import {MdeComponent} from './parameters/mde/mde.component';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {MdeComponent} from './parameters/mde/mde.component';
     TuiDialogModule,
     TuiIslandModule,
     HighlightModule,
+    ClipboardModule,
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
     {provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptor, multi: true},

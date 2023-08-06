@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
+import {FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {
   DefaultFormControlValueAccessorComponent,
 } from '../../utils/default-form-control-value-accessor/default-form-control-value-accessor.component';
@@ -13,10 +13,15 @@ import {
       multi: true,
       useExisting: VarianceComponent,
     },
+    {
+      provide: NG_VALIDATORS,
+      multi: true,
+      useExisting: VarianceComponent,
+    },
   ],
 })
 export class VarianceComponent extends DefaultFormControlValueAccessorComponent {
 
-  form = new FormControl(100, Validators.required)
+  form = new FormControl(100, [Validators.required, Validators.min(0.000001)])
 
 }

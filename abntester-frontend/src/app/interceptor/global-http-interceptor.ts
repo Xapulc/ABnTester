@@ -18,7 +18,7 @@ export class GlobalHttpInterceptor implements HttpInterceptor {
           const message = `${error.status} : ${errorMessage}`
           this.alerts
             .open(message, {
-              label: 'Unexpected error during server request',
+              label: 'Ошибка при обращении к серверу',
               status: TuiNotification.Error,
             }).subscribe()
         }

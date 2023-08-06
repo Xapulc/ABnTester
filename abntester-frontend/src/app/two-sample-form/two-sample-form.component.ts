@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CalculateTwoSampleResponse} from './two-sample-form-model';
 import {TwoSampleCalculationService} from './two-sample-calculation.service';
@@ -10,18 +10,18 @@ import {
 import {BaseCalculationFormComponent} from '../utils/base-calculation-form/base-calculation-form.component';
 import {HintContentModel} from '../hint-content/hint-content.model';
 import {twoSampleHints} from './two-sample-hint-messages.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Clipboard} from '@angular/cdk/clipboard';
+import {TuiAlertService} from '@taiga-ui/core';
+import {Location} from '@angular/common';
+import {Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-two-sample-form',
   templateUrl: './two-sample-form.component.html',
 })
-export class TwoSampleFormComponent extends BaseCalculationFormComponent<CalculateTwoSampleResponse, TwoSampleStandardCalculationResultParams> implements OnInit {
-
-  constructor(private twoSampleCalculationService: TwoSampleCalculationService) {
-    super()
-  }
-
-  hints: HintContentModel[] = twoSampleHints
+export class TwoSampleFormComponent extends BaseCalculationFormComponent<CalculateTwoSampleResponse, TwoSampleStandardCalculationResultParams> {
 
   form: FormGroup = new FormGroup({
     alpha: new FormControl(5, Validators.required),
@@ -31,11 +31,20 @@ export class TwoSampleFormComponent extends BaseCalculationFormComponent<Calcula
     variance: new FormControl(100),
     alternative: new FormControl('RIGHT_SIDED', Validators.required),
     type: new FormControl('BINARY', Validators.required),
-    leftProportion: new FormControl(50, Validators.required),
+    leftProportion: new FormControl(50, [Validators.required, Validators.min(0), Validators.max(100)]),
     rightProportion: new FormControl({value: 50, disabled: true}, Validators.required),
   });
 
-  override ngOnInit(): void {
+  hints: HintContentModel[] = twoSampleHints
+
+  constructor(override router: Router, override route: ActivatedRoute, private twoSampleCalculationService: TwoSampleCalculationService,
+              override clipboard: Clipboard, @Inject(TuiAlertService) override readonly alerts: TuiAlertService,
+              override location: Location) {
+    super(router, route, clipboard, alerts, location)
+  }
+
+
+  override initForm() {
     this.form.get('leftProportion')?.valueChanges.subscribe(
       value => {
         if (value != null) {
@@ -44,13 +53,11 @@ export class TwoSampleFormComponent extends BaseCalculationFormComponent<Calcula
       });
   }
 
-  onSubmit(): void {
+  calculate(): Observable<CalculateTwoSampleResponse> {
     if (this.isBinaryCase()) {
-      this.twoSampleCalculationService.calculateBinary(this.form.value).subscribe(this.handleResponse)
+      return this.twoSampleCalculationService.calculateBinary(this.form.value)
     }
-    if (this.isNonBinaryCase()) {
-      this.twoSampleCalculationService.calculateNonBinary(this.form.value).subscribe(this.handleResponse)
-    }
+    return this.twoSampleCalculationService.calculateNonBinary(this.form.value)
   }
 
   getSuitableCalculationContent() {
@@ -63,11 +70,25 @@ export class TwoSampleFormComponent extends BaseCalculationFormComponent<Calcula
       mde: this.form.get('mde')?.value,
       alpha: this.form.get('alpha')?.value,
       beta: this.form.get('beta')?.value,
+      leftProportion: this.form.get('leftProportion')?.value,
       firstSampleSize: response.leftSampleSize,
       secondSampleSize: response.rightSampleSize,
       alternative: this.form.get('alternative')?.value,
       type: this.form.get('type')?.value,
       variance: this.form.get('variance')?.value,
+    }
+  }
+
+  protected override getLinkParams() {
+    return {
+      ...(this.isBinaryCase() && {p: this.lastAppliedResult?.p0}),
+      mde: this.lastAppliedResult?.mde,
+      alpha: this.lastAppliedResult?.alpha,
+      beta: this.lastAppliedResult?.beta,
+      leftProportion: this.lastAppliedResult?.leftProportion,
+      type: this.lastAppliedResult?.type,
+      alternative: this.lastAppliedResult?.alternative,
+      ...(this.isNonBinaryCase() && {variance: this.lastAppliedResult?.variance}),
     }
   }
 }

@@ -54,11 +54,23 @@
             tuiButton
             size="l"
             type="submit"
+            appearance="primary"
             class="tui-form__button"
             [disabled]="form.invalid"
             (click)="onSubmit()"
           >
             Рассчитать
+          </button>
+          <button
+            *ngIf="showShareButton"
+            tuiButton
+            size="l"
+            icon="tuiIconShare2"
+            appearance="secondary"
+            class="tui-form__button"
+            (click)="share()"
+          >
+            Поделиться
           </button>
         </div>
       </div>

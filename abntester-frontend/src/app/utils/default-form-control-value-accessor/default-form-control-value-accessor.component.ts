@@ -1,8 +1,8 @@
-import {ControlValueAccessor, FormControl} from '@angular/forms';
+import {AbstractControl, ControlValueAccessor, FormControl, ValidationErrors, Validator} from '@angular/forms';
 import {Component, Input} from '@angular/core';
 
 @Component({template: ''})
-export abstract class DefaultFormControlValueAccessorComponent<T = any> implements ControlValueAccessor {
+export abstract class DefaultFormControlValueAccessorComponent implements ControlValueAccessor, Validator {
 
   abstract form: FormControl
   openHint = false
@@ -41,4 +41,7 @@ export abstract class DefaultFormControlValueAccessorComponent<T = any> implemen
     this.openHint = true
   }
 
+  validate(control: AbstractControl): ValidationErrors | null {
+    return this.form.errors;
+  }
 }

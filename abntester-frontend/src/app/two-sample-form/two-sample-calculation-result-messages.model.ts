@@ -9,6 +9,7 @@ export interface TwoSampleStandardCalculationResultParams {
   variance: number,
   alpha: number,
   beta: number,
+  leftProportion: number,
   firstSampleSize: number,
   secondSampleSize: number,
   alternative: OneTwoSidedAlternativeType,
