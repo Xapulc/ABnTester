@@ -325,10 +325,10 @@ print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
     if first_mean > second_mean:
-        print(f"Среднее {first_mean} метрики на первой выборке стат. значимо больше ")
+        print(f"Среднее {first_mean} метрики на первой выборке стат. значимо больше "
               + f"среднего {second_mean} на второй выборке.")
     else:
-        print(f"Среднее {first_mean} метрики на первой выборке стат. значимо меньше ")
+        print(f"Среднее {first_mean} метрики на первой выборке стат. значимо меньше "
               + f"среднего {second_mean} на второй выборке.")
 else:
     print(f"Различие между средними {first_mean} и {second_mean} не является стат. значимым.")`,
