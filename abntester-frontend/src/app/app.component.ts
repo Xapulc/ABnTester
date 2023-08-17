@@ -28,4 +28,8 @@ export class AppComponent {
     const tabRouteLink = tab.routeLink
     return this.router.url.startsWith(tabRouteLink)
   }
+
+  navigate(routeLink: string) {
+    this.router.navigate([routeLink])
+  }
 }

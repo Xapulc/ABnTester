@@ -1,18 +1,46 @@
 <tui-root>
   <header class="wrapper" tuiMode="onLight">
-    <h1 class="tui-text_h4 title">ABnTester</h1>
-    <a *ngFor="let l of links"
-       tuiButton
-       appearance="secondary"
-       routerLink="{{ l.routeLink }}"
-       routerLinkActive
-       class="tui-space_right-3 tui-space_bottom-3"
-       [class.current-tab]="isSelectedTab(l)"
+    <a
+      tuiLink
+      title="Стартовая страница"
+      rel="noreferrer"
+      class="title-link"
+      href="/"
     >
-      {{l.displayName}}
+      <h1 class="tui-text_h4 title">ABnTester</h1>
+    </a>
+    <a
+      tuiLink
+      title="Код проекта на GitHub"
+      icon="tuiIconGithubLarge"
+      target="_blank"
+      rel="noreferrer"
+      href="https://github.com/Xapulc/ABnTester"
+      class="link"
+    >
+    </a>
+    <a
+      tuiLink
+      title="Обратная связь"
+      icon="tuiIconMessageSquareLarge"
+      target="_blank"
+      rel="noreferrer"
+      href="mailto:abntester.app@gmail.com"
+      class="link"
+    >
     </a>
   </header>
   <div class="content">
+    <tui-tabs>
+      <button
+        tuiTab
+        *ngFor="let l of links"
+        (click)="navigate(l.routeLink)"
+      >
+        {{l.displayName}}
+      </button>
+    </tui-tabs>
+
     <router-outlet></router-outlet>
   </div>
 </tui-root>

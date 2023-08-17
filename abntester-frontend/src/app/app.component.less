@@ -10,20 +10,47 @@
   .inset-border(bottom, light);
   display: flex;
   flex-direction: row;
-  padding: 2rem 2rem 0;
+  padding: 0rem 1rem 0;
+  position: fixed;
+  height: 4rem;
+  background: #eeeeef;
+  z-index: 1;
+  left: 0;
+  right: 0;
 }
 
 .content {
   padding-left: 20px;
   padding-bottom: 15px;
-  background: #F6F7F8
+  background: #F6F7F8;
+  position: relative;
+  top: 4rem;
+}
+
+.title-link {
+  margin: 0;
+  margin-right: auto;
 }
 
 .title {
   min-width: 15.625rem;
-  margin: 0;
 }
 
-.current-tab {
+.navigate-btn-block {
+  width: 40rem;
+  min-width: 40rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.current-tab .t-wrapper {
   background: #b7b7b7;
+}
+
+.link {
+  padding: 1.6rem 1rem 0;
+  margin-left: 0rem;
 }

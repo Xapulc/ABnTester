@@ -3,11 +3,11 @@ import {BrowserModule} from '@angular/platform-browser';
 import {
   TuiAlertModule,
   TuiButtonModule,
-  TuiDialogModule,
+  TuiDialogModule, TuiDropdownModule,
   TuiErrorModule,
   TuiGroupModule,
   TuiHintModule,
-  TuiLabelModule,
+  TuiLabelModule, TuiLinkModule,
   TuiModeModule,
   TuiRootModule,
   TuiTextfieldControllerModule,
@@ -85,6 +85,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     TuiIslandModule,
     HighlightModule,
     ClipboardModule,
+    TuiLinkModule,
+    TuiDropdownModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
     {provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptor, multi: true},
