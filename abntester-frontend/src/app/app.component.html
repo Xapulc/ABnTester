@@ -31,7 +31,7 @@
     </a>
   </header>
   <div class="content">
-    <tui-tabs>
+    <tui-tabs [activeItemIndex]="activeItemIndex">
       <button
         tuiTab
         *ngFor="let l of links"

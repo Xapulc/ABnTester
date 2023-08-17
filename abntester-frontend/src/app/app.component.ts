@@ -24,6 +24,10 @@ export class AppComponent {
     },
   ]
 
+  get activeItemIndex() {
+    return this.links.findIndex(el => this.router.url.startsWith(el.routeLink))
+  }
+
   isSelectedTab(tab: any) {
     const tabRouteLink = tab.routeLink
     return this.router.url.startsWith(tabRouteLink)
