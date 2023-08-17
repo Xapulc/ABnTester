@@ -23,21 +23,26 @@ tui-root {
 
 .form-and-result-container {
   display: flex;
+  margin-left: 2rem;
+  margin-right: 2rem;
   flex-wrap: nowrap;
   align-content: flex-start;
   @media (max-width: 100vw) {
     flex-wrap: wrap;
+    .result-container {
+      max-width: 90vw;
+    }
   }
 }
 
 .form-container {
-  min-width: 40rem;
-  margin-right: 20px;
+  //margin-left: 0.5rem;
+  //margin-right: 3rem;
 }
 
 .result-container {
-  min-width: 40rem;
   width: 40rem;
   flex-grow: 1;
-  padding-right: 1rem;
+  //margin-left: 0.5rem;
+  //margin-right: 3rem;
 }

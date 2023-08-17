@@ -11,12 +11,16 @@
   display: flex;
   flex-direction: row;
   padding: 2rem 2rem 0;
+  flex-wrap: nowrap;
+  @media (max-width: 100vw) {
+    flex-wrap: wrap;
+  }
 }
 
 .content {
-  padding-left: 20px;
   padding-bottom: 15px;
-  background: #F6F7F8
+  background: #F6F7F8;
+  //padding: 2rem 2rem 0;
 }
 
 .title {
