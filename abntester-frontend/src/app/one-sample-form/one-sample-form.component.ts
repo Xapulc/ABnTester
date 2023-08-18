@@ -78,4 +78,8 @@ export class OneSampleFormComponent extends BaseCalculationFormComponent<Calcula
       ...(this.isNonBinaryCase() && {variance: this.lastAppliedResult?.variance}),
     }
   }
+
+  protected override targetName(): string {
+    return "ONE_SAMPLE";
+  }
 }

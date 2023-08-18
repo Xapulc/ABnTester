@@ -9,6 +9,7 @@ import {Clipboard} from '@angular/cdk/clipboard';
 import {TuiAlertService, TuiNotification} from '@taiga-ui/core';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
+declare var ym:any;
 
 const showResultParam = "showResult"
 
@@ -103,8 +104,12 @@ export abstract class BaseCalculationFormComponent<CalcResponse, ResultParams> i
     if (this.form.invalid) {
       return
     }
+    const params = this.form.value
+    ym(94541330, 'reachGoal', this.targetName(), params)
     this.calculate().subscribe(this.handleResponse)
   }
+
+  protected abstract targetName(): string
 
   private handleResponse = (response: CalcResponse) => {
     this.lastAppliedResult = this.getCalculationParams(response)

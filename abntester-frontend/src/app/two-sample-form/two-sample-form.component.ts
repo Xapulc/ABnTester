@@ -91,4 +91,8 @@ export class TwoSampleFormComponent extends BaseCalculationFormComponent<Calcula
       ...(this.isNonBinaryCase() && {variance: this.lastAppliedResult?.variance}),
     }
   }
+
+  protected override targetName(): string {
+    return "TWO_SAMPLE";
+  }
 }
