@@ -44,7 +44,6 @@ import {StandardCalculationResultComponent} from './standard-calculation-result/
 import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
 import {MdeComponent} from './parameters/mde/mde.component';
 import {ClipboardModule} from '@angular/cdk/clipboard';
-import {MetrikaModule} from "ng-yandex-metrika";
 
 @NgModule({
   declarations: [
@@ -87,15 +86,7 @@ import {MetrikaModule} from "ng-yandex-metrika";
     HighlightModule,
     ClipboardModule,
     TuiLinkModule,
-    TuiDropdownModule,
-    MetrikaModule.forRoot(
-      {id: 94541330,
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true,
-        webvisor:true
-      }, // CounterConfig | CounterConfig[]
-    ),
+    TuiDropdownModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
     {provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptor, multi: true},
