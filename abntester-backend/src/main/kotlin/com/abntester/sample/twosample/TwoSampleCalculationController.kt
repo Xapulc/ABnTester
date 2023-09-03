@@ -1,6 +1,8 @@
 package com.abntester.sample.twosample
 
 import com.abntester.sample.SampleAlternative
+import com.abntester.sample.SampleSizeCalculationBinaryBaseRequest
+import com.abntester.sample.SampleSizeCalculationNonBinaryBaseRequest
 import java.math.BigDecimal
 import javax.validation.Valid
 import javax.validation.constraints.DecimalMax
@@ -36,37 +38,37 @@ class TwoSampleCalculationController constructor(private val twoSampleCalculatio
 data class TwoSampleBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
-    val alpha: BigDecimal,
+    override val alpha: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
-    val beta: BigDecimal,
+    override val beta: BigDecimal,
     @field:Positive
-    val mde: BigDecimal,
+    override val mde: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
-    val p: BigDecimal,
+    override val p: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
     val leftProportion: BigDecimal,
-    val alternative: SampleAlternative,
-)
+    override val alternative: SampleAlternative,
+) : SampleSizeCalculationBinaryBaseRequest
 
 data class TwoSampleNonBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
-    val alpha: BigDecimal,
+    override val alpha: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
-    val beta: BigDecimal,
+    override val beta: BigDecimal,
     @field:Positive
-    val mde: BigDecimal,
+    override val mde: BigDecimal,
     @field:Positive
-    val variance: BigDecimal,
+    override val variance: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
     val leftProportion: BigDecimal,
-    val alternative: SampleAlternative,
-)
+    override val alternative: SampleAlternative,
+) : SampleSizeCalculationNonBinaryBaseRequest
 
 data class TwoSampleCalculationResponse(
     val leftSampleSize: Int,

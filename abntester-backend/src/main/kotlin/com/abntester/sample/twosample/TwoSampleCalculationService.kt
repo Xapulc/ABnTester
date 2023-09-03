@@ -12,7 +12,7 @@ import java.math.RoundingMode
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class TwoSampleCalculationService constructor(private val generalSampleSizeCalculationService: GeneralSampleSizeCalculationService) {
+class TwoSampleCalculationService(private val generalSampleSizeCalculationService: GeneralSampleSizeCalculationService) {
 
     fun calcBinarySampleSize(request: TwoSampleBinaryCalculationRequest): TwoSampleCalculationResponse {
         val result: GeneralSampleSizeCalculationResult =

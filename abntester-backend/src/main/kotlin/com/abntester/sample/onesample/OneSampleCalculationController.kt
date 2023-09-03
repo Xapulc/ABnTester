@@ -1,6 +1,8 @@
 package com.abntester.sample.onesample
 
 import com.abntester.sample.SampleAlternative
+import com.abntester.sample.SampleSizeCalculationBinaryBaseRequest
+import com.abntester.sample.SampleSizeCalculationNonBinaryBaseRequest
 import java.math.BigDecimal
 import javax.validation.Valid
 import javax.validation.constraints.DecimalMax
@@ -36,31 +38,31 @@ class OneSampleCalculationController constructor(private val oneSampleCalculatio
 data class OneSampleBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
-    val alpha: BigDecimal,
+    override val alpha: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
-    val beta: BigDecimal,
+    override val beta: BigDecimal,
     @field:Positive
-    val mde: BigDecimal,
+    override val mde: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
-    val p: BigDecimal,
-    val alternative: SampleAlternative,
-)
+    override val p: BigDecimal,
+    override val alternative: SampleAlternative,
+) : SampleSizeCalculationBinaryBaseRequest
 
 data class OneSampleNonBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
-    val alpha: BigDecimal,
+    override val alpha: BigDecimal,
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
-    val beta: BigDecimal,
+    override val beta: BigDecimal,
     @field:Positive
-    val mde: BigDecimal,
+    override val mde: BigDecimal,
     @field:Positive
-    val variance: BigDecimal,
-    val alternative: SampleAlternative,
-)
+    override val variance: BigDecimal,
+    override val alternative: SampleAlternative,
+) : SampleSizeCalculationNonBinaryBaseRequest
 
 data class OneSampleCalculationResponse(
     val sampleSize: Int,

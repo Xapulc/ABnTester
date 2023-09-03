@@ -8,11 +8,15 @@
         <div class="tui-form__row tui-form__row_multi-fields">
           <alpha-param formControlName="alpha"
                        [hintContent]="getSuitableHintContent().alpha"
-                       class="tui-form__multi-field"/>
+                       class="tui-form__multi-field">
+
+          </alpha-param>
           <beta-param formControlName="beta"
                       [hintContent]="getSuitableHintContent().beta"
                       class="tui-form__multi-field"/>
         </div>
+        <tui-error *ngIf="form.hasError('alphaAndBetaMore100')" [error]="form.getError('alphaAndBetaMore100')">
+        </tui-error>
         <div class="tui-form__row tui-form__row_multi-fields">
           <div class="tui-form__multi-field">
             <mde-param formControlName="mde" [hintContent]="getSuitableHintContent().mde" [isPercent]="isBinaryCase()"/>
@@ -24,6 +28,10 @@
             <variance-param formControlName="variance" [hintContent]="getSuitableHintContent().variance"/>
           </div>
         </div>
+        <tui-error *ngIf="form.hasError('mdeMoreThanP')" [error]="form.getError('mdeMoreThanP')">
+        </tui-error>
+        <tui-error *ngIf="form.hasError('mdeMoreThan1MinusP')" [error]="form.getError('mdeMoreThan1MinusP')">
+        </tui-error>
         <div class="tui-form__row">
           <one-two-sided-alternative-param formControlName="alternative"/>
         </div>

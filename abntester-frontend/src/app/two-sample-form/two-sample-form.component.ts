@@ -15,6 +15,8 @@ import {Clipboard} from '@angular/cdk/clipboard';
 import {TuiAlertService} from '@taiga-ui/core';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
+import {aplhaPlusBetaValidator} from '../utils/validator/alpha-beta-validator';
+import {binaryMdeValidator} from '../utils/validator/binary-mde-validator';
 
 
 @Component({
@@ -33,7 +35,7 @@ export class TwoSampleFormComponent extends BaseCalculationFormComponent<Calcula
     type: new FormControl('BINARY', Validators.required),
     leftProportion: new FormControl(50, [Validators.required, Validators.min(0), Validators.max(100)]),
     rightProportion: new FormControl({value: 50, disabled: true}, Validators.required),
-  });
+  }, [aplhaPlusBetaValidator, binaryMdeValidator]);
 
   hints: HintContentModel[] = twoSampleHints
 

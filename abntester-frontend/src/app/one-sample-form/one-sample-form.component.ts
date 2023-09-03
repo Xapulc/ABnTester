@@ -14,6 +14,8 @@ import {Clipboard} from '@angular/cdk/clipboard';
 import {TuiAlertService} from '@taiga-ui/core';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
+import {aplhaPlusBetaValidator} from '../utils/validator/alpha-beta-validator';
+import {binaryMdeValidator} from '../utils/validator/binary-mde-validator';
 
 @Component({
   selector: 'app-one-sample-form',
@@ -39,7 +41,7 @@ export class OneSampleFormComponent extends BaseCalculationFormComponent<Calcula
     variance: new FormControl(100),
     alternative: new FormControl('RIGHT_SIDED', Validators.required),
     type: new FormControl('BINARY', Validators.required),
-  });
+  }, [aplhaPlusBetaValidator, binaryMdeValidator]);
   hints = oneSampleHints
 
   calculate(): Observable<CalculateOneSampleResponse> {

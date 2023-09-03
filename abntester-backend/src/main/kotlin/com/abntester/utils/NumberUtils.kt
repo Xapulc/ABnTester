@@ -18,3 +18,4 @@ fun max(v1: BigDecimal, v2: BigDecimal, v3: BigDecimal): BigDecimal {
     return v1.max(v2).max(v3)
 }
 
+val ONE_HUNDRED = BigDecimal.valueOf(100)
