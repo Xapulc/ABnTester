@@ -1,7 +1,7 @@
 package com.abntester.sample.onesample
 
-import com.abntester.sample.GeneralSampleSizeCalculationService
-import com.abntester.sample.SampleAlternative
+import com.abntester.sample.GeneralSampleSizeNonBinaryCalculationService
+import com.abntester.sample.common.SampleAlternative
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
@@ -10,7 +10,10 @@ import java.math.BigDecimal
 
 class OneSampleCalculationServiceNonBinaryTest {
 
-    private val oneSampleCalculationService = OneSampleCalculationService(GeneralSampleSizeCalculationService())
+    private val oneSampleCalculationService = OneSampleCalculationService(
+        GeneralSampleSizeNonBinaryCalculationService(),
+        OneSampleBinarySizeCalculator()
+    )
 
 
     @ParameterizedTest

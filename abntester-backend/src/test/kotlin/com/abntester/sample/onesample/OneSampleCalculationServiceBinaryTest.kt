@@ -1,7 +1,7 @@
 package com.abntester.sample.onesample
 
-import com.abntester.sample.GeneralSampleSizeCalculationService
-import com.abntester.sample.SampleAlternative
+import com.abntester.sample.GeneralSampleSizeNonBinaryCalculationService
+import com.abntester.sample.common.SampleAlternative
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
@@ -10,7 +10,10 @@ import java.math.BigDecimal
 
 class OneSampleCalculationServiceBinaryTest {
 
-    private val oneSampleCalculationService = OneSampleCalculationService(GeneralSampleSizeCalculationService())
+    private val oneSampleCalculationService = OneSampleCalculationService(
+        GeneralSampleSizeNonBinaryCalculationService(),
+        OneSampleBinarySizeCalculator()
+    )
 
 
     @ParameterizedTest
@@ -48,7 +51,7 @@ class OneSampleCalculationServiceBinaryTest {
                 mde = 1.toBigDecimal(),
                 p = 10.toBigDecimal(),
                 alternative = SampleAlternative.RIGHT_SIDED,
-                expectedSize = 6053,
+                expectedSize = 5728,
             ),
             OneSampleBinaryTestCase(
                 alpha = 3.toBigDecimal(),
@@ -56,7 +59,7 @@ class OneSampleCalculationServiceBinaryTest {
                 mde = 5.toBigDecimal(),
                 p = 60.toBigDecimal(),
                 alternative = SampleAlternative.LEFT_SIDED,
-                expectedSize = 843,
+                expectedSize = 827,
             ),
             OneSampleBinaryTestCase(
                 alpha = 5.toBigDecimal(),
@@ -64,7 +67,7 @@ class OneSampleCalculationServiceBinaryTest {
                 mde = 1.toBigDecimal(),
                 p = 10.toBigDecimal(),
                 alternative = SampleAlternative.TWO_SIDED,
-                expectedSize = 7685,
+                expectedSize = 7248,
             ),
             OneSampleBinaryTestCase(
                 alpha = 0.5.toBigDecimal(),
@@ -72,7 +75,7 @@ class OneSampleCalculationServiceBinaryTest {
                 mde = 8.3.toBigDecimal(),
                 p = 40.toBigDecimal(),
                 alternative = SampleAlternative.TWO_SIDED,
-                expectedSize = 753,
+                expectedSize = 735,
             ),
         )
     }

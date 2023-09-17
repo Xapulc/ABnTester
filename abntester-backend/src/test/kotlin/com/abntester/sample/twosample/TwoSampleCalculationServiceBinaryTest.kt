@@ -1,7 +1,7 @@
 package com.abntester.sample.twosample
 
-import com.abntester.sample.GeneralSampleSizeCalculationService
-import com.abntester.sample.SampleAlternative
+import com.abntester.sample.GeneralSampleSizeNonBinaryCalculationService
+import com.abntester.sample.common.SampleAlternative
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
@@ -10,7 +10,10 @@ import java.math.BigDecimal
 
 class TwoSampleCalculationServiceBinaryTest {
 
-    private val twoSampleCalculationService = TwoSampleCalculationService(GeneralSampleSizeCalculationService())
+    private val twoSampleCalculationService = TwoSampleCalculationService(
+        GeneralSampleSizeNonBinaryCalculationService(),
+        TwoSampleBinarySizeCalculator()
+    )
 
 
     @ParameterizedTest
@@ -62,8 +65,8 @@ class TwoSampleCalculationServiceBinaryTest {
                 p = 80.toBigDecimal(),
                 leftProportion = 35.toBigDecimal(),
                 alternative = SampleAlternative.RIGHT_SIDED,
-                expectedLeftSize = 912,
-                expectedRightSize = 1694
+                expectedLeftSize = 711,
+                expectedRightSize = 1321
             ),
             TwoSampleBinaryTestCase(
                 alpha = 5.toBigDecimal(),
@@ -82,8 +85,8 @@ class TwoSampleCalculationServiceBinaryTest {
                 p = 15.toBigDecimal(),
                 leftProportion = 30.toBigDecimal(),
                 alternative = SampleAlternative.LEFT_SIDED,
-                expectedLeftSize = 3026,
-                expectedRightSize = 7060
+                expectedLeftSize = 2720,
+                expectedRightSize = 6347
             ),
         )
     }

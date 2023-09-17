@@ -1,8 +1,8 @@
 package com.abntester.sample.onesample
 
-import com.abntester.sample.SampleAlternative
 import com.abntester.sample.SampleSizeCalculationBinaryBaseRequest
 import com.abntester.sample.SampleSizeCalculationNonBinaryBaseRequest
+import com.abntester.sample.common.SampleAlternative
 import java.math.BigDecimal
 import javax.validation.Valid
 import javax.validation.constraints.DecimalMax
@@ -15,7 +15,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
 @Path("/api/one-sample/calculate")
-class OneSampleCalculationController constructor(private val oneSampleCalculationService: OneSampleCalculationService) {
+class OneSampleCalculationController(private val oneSampleCalculationService: OneSampleCalculationService) {
 
 
     @POST

@@ -1,45 +1,23 @@
 package com.abntester.sample
 
-import com.abntester.utils.div
+import com.abntester.sample.common.GeneralSampleSizeCalculationResult
+import com.abntester.sample.common.NonBinarySampleSizeCalculationParams
+import com.abntester.sample.common.alphaCorrected
+import com.abntester.sample.common.normQuantile
 import com.abntester.utils.minus
-import org.apache.commons.math3.distribution.NormalDistribution
-import java.math.BigDecimal
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class GeneralSampleSizeCalculationService {
+class GeneralSampleSizeNonBinaryCalculationService {
 
-    companion object {
-        val DEFAULT_NORMAL_DISTRIBUTION = NormalDistribution()
-    }
-
-    fun calcSampleSize(params: GeneralSampleSizeCalculationParams): GeneralSampleSizeCalculationResult {
+    fun calcSampleSize(params: NonBinarySampleSizeCalculationParams): GeneralSampleSizeCalculationResult {
         with(params) {
-            val alphaCorrected = when (alternative) {
-                SampleAlternative.LEFT_SIDED, SampleAlternative.RIGHT_SIDED -> alpha
-                SampleAlternative.TWO_SIDED -> alpha / 2
-            }
-            val zOneMinusAlpha =
-                DEFAULT_NORMAL_DISTRIBUTION.inverseCumulativeProbability((1 - alphaCorrected).toDouble()).toBigDecimal()
-            val zBeta = DEFAULT_NORMAL_DISTRIBUTION.inverseCumulativeProbability(beta.toDouble()).toBigDecimal()
-            val size = variance * (zOneMinusAlpha - zBeta).pow(2) / mde.pow(2)
+            val alphaCorrected = alphaCorrected(alpha, alternative)
+            val zOneMinusAlpha = normQuantile(1 - alphaCorrected)
+            val zOneMinusBeta = normQuantile(1 - beta)
+            val size = variance * (zOneMinusAlpha + zOneMinusBeta).pow(2) / mde.pow(2)
             return GeneralSampleSizeCalculationResult(sampleSize = size)
         }
     }
 }
 
-data class GeneralSampleSizeCalculationParams(
-    val alpha: BigDecimal,
-    val beta: BigDecimal,
-    val mde: BigDecimal,
-    val variance: BigDecimal,
-    val alternative: SampleAlternative,
-)
-
-enum class SampleAlternative {
-    LEFT_SIDED, RIGHT_SIDED, TWO_SIDED
-}
-
-data class GeneralSampleSizeCalculationResult(
-    val sampleSize: BigDecimal,
-)

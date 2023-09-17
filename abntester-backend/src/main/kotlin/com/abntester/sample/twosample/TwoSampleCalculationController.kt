@@ -1,8 +1,8 @@
 package com.abntester.sample.twosample
 
-import com.abntester.sample.SampleAlternative
 import com.abntester.sample.SampleSizeCalculationBinaryBaseRequest
 import com.abntester.sample.SampleSizeCalculationNonBinaryBaseRequest
+import com.abntester.sample.common.SampleAlternative
 import java.math.BigDecimal
 import javax.validation.Valid
 import javax.validation.constraints.DecimalMax
@@ -15,7 +15,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
 @Path("/api/two-sample/calculate")
-class TwoSampleCalculationController constructor(private val twoSampleCalculationService: TwoSampleCalculationService) {
+class TwoSampleCalculationController(private val twoSampleCalculationService: TwoSampleCalculationService) {
 
     @POST
     @Path("/binary")

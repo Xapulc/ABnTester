@@ -1,5 +1,6 @@
 package com.abntester.sample
 
+import com.abntester.sample.common.SampleAlternative
 import java.math.BigDecimal
 
 interface SampleSizeCalculationBaseRequest {
