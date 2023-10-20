@@ -60,7 +60,7 @@ function binaryLeftSidedCalculationContent(params: OneSampleStandardCalculationR
       <li class="tui-list__item"> если реальная конверсия $p$ не больше $${p0_mde}\\%$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
       </ul>
       <h1>Критерий</h1>`,
-    code: `from statsmodels.stats.proportion import proportions_ztest
+    code: `from scipy.stats import binomtest
 
 
 success_cnt = \<количество успешных реализаций\>
@@ -72,11 +72,11 @@ p = success_cnt / sample_size
 alpha = ${params.alpha} / 100
 
 # Используем критерий с левосторонней альтернативой
-res = proportions_ztest(success_cnt,
-                        sample_size,
-                        p0,
-                        alternative="smaller")
-pvalue = res[1]
+res = binomtest(success_cnt,
+                sample_size,
+                p=p0,
+                alternative="less")
+pvalue = res.pvalue
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -103,7 +103,7 @@ function binaryRightSidedCalculationContent(params: OneSampleStandardCalculation
       <li class="tui-list__item"> если реальная конверсия $p$ не меньше $${p0_mde}\\%$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
       </ul>
       <h1>Критерий</h1>`,
-    code: `from statsmodels.stats.proportion import proportions_ztest
+    code: `from scipy.stats import binomtest
 
 
 success_cnt = \<количество успешных реализаций\>
@@ -115,11 +115,11 @@ p = success_cnt / sample_size
 alpha = ${params.alpha} / 100
 
 # Используем критерий с правосторонней альтернативой
-res = proportions_ztest(success_cnt,
-                        sample_size,
-                        p0,
-                        alternative="larger")
-pvalue = res[1]
+res = binomtest(success_cnt,
+                sample_size,
+                p=p0,
+                alternative="greater")
+pvalue = res.pvalue
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
@@ -145,7 +145,7 @@ function binaryTwoSidedCalculationContent(params: OneSampleStandardCalculationRe
       <li class="tui-list__item"> если реальная конверсия $p$ отличается от $${params.p0}\\%$ хотя бы на $${params.mde}\\%$, то вероятность ошибки будет не более $${params.beta}\\%$.</li>
       </ul>
       <h1>Критерий</h1>`,
-    code: `from statsmodels.stats.proportion import proportions_ztest
+    code: `from scipy.stats import binomtest
 
 
 success_cnt = \<количество успешных реализаций\>
@@ -157,11 +157,11 @@ p = success_cnt / sample_size
 alpha = ${params.alpha} / 100
 
 # Используем критерий с двусторонней альтернативой
-res = proportions_ztest(success_cnt,
-                        sample_size,
-                        p0,
-                        alternative="two-sided")
-pvalue = res[1]
+res = binomtest(success_cnt,
+                sample_size,
+                p=p0,
+                alternative="two-sided")
+pvalue = res.pvalue
 print(f"P-value критерия = {pvalue}.")
 
 if pvalue < alpha:
