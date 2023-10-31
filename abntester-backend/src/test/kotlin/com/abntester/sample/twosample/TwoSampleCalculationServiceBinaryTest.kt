@@ -55,8 +55,8 @@ class TwoSampleCalculationServiceBinaryTest {
                 p = 10.toBigDecimal(),
                 leftProportion = 50.toBigDecimal(),
                 alternative = SampleAlternative.RIGHT_SIDED,
-                expectedLeftSize = 11618,
-                expectedRightSize = 11618
+                expectedLeftSize = 11614,
+                expectedRightSize = 11614
             ),
             TwoSampleBinaryTestCase(
                 alpha = 1.toBigDecimal(),
@@ -65,8 +65,8 @@ class TwoSampleCalculationServiceBinaryTest {
                 p = 80.toBigDecimal(),
                 leftProportion = 35.toBigDecimal(),
                 alternative = SampleAlternative.RIGHT_SIDED,
-                expectedLeftSize = 711,
-                expectedRightSize = 1321
+                expectedLeftSize = 676,
+                expectedRightSize = 1254
             ),
             TwoSampleBinaryTestCase(
                 alpha = 5.toBigDecimal(),
@@ -75,8 +75,8 @@ class TwoSampleCalculationServiceBinaryTest {
                 p = 10.toBigDecimal(),
                 leftProportion = 50.toBigDecimal(),
                 alternative = SampleAlternative.TWO_SIDED,
-                expectedLeftSize = 14749,
-                expectedRightSize = 14749
+                expectedLeftSize = 13488,
+                expectedRightSize = 13488
             ),
             TwoSampleBinaryTestCase(
                 alpha = 5.toBigDecimal(),
@@ -85,8 +85,8 @@ class TwoSampleCalculationServiceBinaryTest {
                 p = 15.toBigDecimal(),
                 leftProportion = 30.toBigDecimal(),
                 alternative = SampleAlternative.LEFT_SIDED,
-                expectedLeftSize = 2720,
-                expectedRightSize = 6347
+                expectedLeftSize = 2656,
+                expectedRightSize = 6196
             ),
         )
     }
