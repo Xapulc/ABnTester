@@ -14,6 +14,10 @@ fun max(v1: BigDecimal, v2: BigDecimal): BigDecimal {
     return v1.max(v2)
 }
 
+fun min(v1: BigDecimal, v2: BigDecimal): BigDecimal {
+    return v1.min(v2)
+}
+
 fun max(v1: BigDecimal, v2: BigDecimal, v3: BigDecimal): BigDecimal {
     return v1.max(v2).max(v3)
 }

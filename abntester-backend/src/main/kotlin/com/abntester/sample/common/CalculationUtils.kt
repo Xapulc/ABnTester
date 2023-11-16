@@ -2,6 +2,7 @@ package com.abntester.sample.common
 
 import com.abntester.utils.div
 import com.abntester.utils.max
+import com.abntester.utils.min
 import com.abntester.utils.minus
 import java.math.BigDecimal
 import kotlin.math.asin
@@ -52,7 +53,7 @@ fun effectSize(p0: BigDecimal, mde: BigDecimal, alternative: SampleAlternative):
     return when (alternative) {
         SampleAlternative.LEFT_SIDED -> effectSizeForLeft(p0, mde)
         SampleAlternative.RIGHT_SIDED -> effectSizeForRight(p0, mde)
-        SampleAlternative.TWO_SIDED -> max(
+        SampleAlternative.TWO_SIDED -> min(
                 effectSizeForLeft(p0, mde),
                 effectSizeForRight(p0, mde)
         )

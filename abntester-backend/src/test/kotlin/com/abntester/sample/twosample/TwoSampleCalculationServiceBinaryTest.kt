@@ -75,8 +75,8 @@ class TwoSampleCalculationServiceBinaryTest {
                 p = 10.toBigDecimal(),
                 leftProportion = 50.toBigDecimal(),
                 alternative = SampleAlternative.TWO_SIDED,
-                expectedLeftSize = 13488,
-                expectedRightSize = 13488
+                expectedLeftSize = 14745,
+                expectedRightSize = 14745
             ),
             TwoSampleBinaryTestCase(
                 alpha = 5.toBigDecimal(),
