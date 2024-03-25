@@ -68,12 +68,12 @@ function binaryLeftSidedCalculationContent(params: TwoSampleStandardCalculationR
     code: `from statsmodels.stats.proportion import proportions_ztest
 
 
-first_success_cnt =  <количество успешных реализаций в первой выборке>
-first_sample_size =  <размер первой выборки>
+first_success_cnt =  # количество успешных реализаций в первой выборке
+first_sample_size =  # размер первой выборки
 first_conv = first_success_cnt / first_sample_size
 
-second_success_cnt = <количество успешных реализаций во второй выборке>
-second_sample_size = <размер второй выборки>
+second_success_cnt =  # количество успешных реализаций во второй выборке
+second_sample_size =  # размер второй выборки
 second_conv = second_success_cnt / second_sample_size
 
 alpha = ${params.alpha} / 100
@@ -115,12 +115,12 @@ function binaryRightSidedCalculationContent(params: TwoSampleStandardCalculation
     code: `from statsmodels.stats.proportion import proportions_ztest
 
 
-first_success_cnt =  <количество успешных реализаций в первой выборке>
-first_sample_size =  <размер первой выборки>
+first_success_cnt =  # количество успешных реализаций в первой выборке
+first_sample_size =  # размер первой выборки
 first_conv = first_success_cnt / first_sample_size
 
-second_success_cnt = <количество успешных реализаций во второй выборке>
-second_sample_size = <размер второй выборки>
+second_success_cnt =  # количество успешных реализаций во второй выборке
+second_sample_size =  # размер второй выборки
 second_conv = second_success_cnt / second_sample_size
 
 alpha = ${params.alpha} / 100
@@ -162,12 +162,12 @@ function binaryTwoSidedCalculationContent(params: TwoSampleStandardCalculationRe
     code: `from statsmodels.stats.proportion import proportions_ztest
 
 
-first_success_cnt =  <количество успешных реализаций в первой выборке>
-first_sample_size =  <размер первой выборки>
+first_success_cnt =  # количество успешных реализаций в первой выборке
+first_sample_size =  # размер первой выборки
 first_conv = first_success_cnt / first_sample_size
 
-second_success_cnt = <количество успешных реализаций во второй выборке>
-second_sample_size = <размер второй выборки>
+second_success_cnt =  # количество успешных реализаций во второй выборке
+second_sample_size =  # размер второй выборки
 second_conv = second_success_cnt / second_sample_size
 
 alpha = ${params.alpha} / 100
@@ -212,10 +212,10 @@ function nonBinaryLeftSidedCalculationContent(params: TwoSampleStandardCalculati
     code: `from scipy.stats import ttest_ind
 
 
-first_sample =  <значения целевой метрики теста в первой вариации>
+first_sample =  # значения целевой метрики теста в первой вариации
 first_mean = np.mean(first_sample)
 
-second_sample = <значения целевой метрики теста во второй вариации>
+second_sample =  # значения целевой метрики теста во второй вариации
 second_mean = np.mean(second_sample)
 
 alpha = ${params.alpha} / 100
@@ -259,10 +259,10 @@ function nonBinaryRightSidedCalculationContent(params: TwoSampleStandardCalculat
     code: `from scipy.stats import ttest_ind
 
 
-first_sample =  <значения целевой метрики теста в первой вариации>
+first_sample =  # значения целевой метрики теста в первой вариации
 first_mean = np.mean(first_sample)
 
-second_sample = <значения целевой метрики теста во второй вариации>
+second_sample =  # значения целевой метрики теста во второй вариации
 second_mean = np.mean(second_sample)
 
 alpha = ${params.alpha} / 100
@@ -306,10 +306,10 @@ function nonBinaryTwoSidedCalculationContent(params: TwoSampleStandardCalculatio
     code: `from scipy.stats import ttest_ind
 
 
-first_sample =  <значения целевой метрики теста в первой вариации>
+first_sample =  # значения целевой метрики теста в первой вариации
 first_mean = np.mean(first_sample)
 
-second_sample = <значения целевой метрики теста во второй вариации>
+second_sample = # значения целевой метрики теста во второй вариации
 second_mean = np.mean(second_sample)
 
 alpha = ${params.alpha} / 100

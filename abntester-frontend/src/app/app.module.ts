@@ -43,7 +43,6 @@ import {GlobalHttpInterceptor} from './interceptor/global-http-interceptor';
 import {of} from 'rxjs';
 import {MathjaxModule} from 'mathjax-angular';
 import {StandardCalculationResultComponent} from './standard-calculation-result/standard-calculation-result.component';
-// import {HighlightJsModule} from 'ngx-highlight-js';
 import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
 import {MdeComponent} from './parameters/mde/mde.component';
 import {ClipboardModule} from '@angular/cdk/clipboard';

@@ -6,10 +6,11 @@ import {HintContentModel} from '../../hint-content/hint-content.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {tuiMarkControlAsTouchedAndValidate} from '@taiga-ui/cdk';
 import {Clipboard} from '@angular/cdk/clipboard';
-import {TuiAlertService, TuiNotification} from '@taiga-ui/core';
+import {TuiAlertService} from '@taiga-ui/core';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
-declare var ym:any;
+
+declare var ym: any;
 
 const showResultParam = "showResult"
 
@@ -95,7 +96,7 @@ export abstract class BaseCalculationFormComponent<CalcResponse, ResultParams> i
     const queryString = new URLSearchParams(linkParams).toString()
     const fullLink = `${url}?${queryString}`
     const result = this.clipboard.copy(fullLink)
-    const status = result ? TuiNotification.Success : TuiNotification.Error
+    const status = result ? "success" : "error"
     const msg = result ? 'Ссылка успешно скопирована в буфер обмена' : 'Скопировать ссылку не удалось'
     this.alerts.open(msg, {status: status}).subscribe()
   }
