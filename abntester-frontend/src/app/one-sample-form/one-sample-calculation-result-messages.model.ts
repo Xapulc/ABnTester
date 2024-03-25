@@ -63,8 +63,8 @@ function binaryLeftSidedCalculationContent(params: OneSampleStandardCalculationR
     code: `from scipy.stats import binomtest
 
 
-success_cnt = \<количество успешных реализаций\>
-sample_size = \<размер полученной выборки\>
+success_cnt =  # количество успешных реализаций
+sample_size =  # размер полученной выборки
 
 # Базовая конверсия
 p0 = ${params.p0} / 100
@@ -106,8 +106,8 @@ function binaryRightSidedCalculationContent(params: OneSampleStandardCalculation
     code: `from scipy.stats import binomtest
 
 
-success_cnt = \<количество успешных реализаций\>
-sample_size = \<размер полученной выборки\>
+success_cnt =  # количество успешных реализаций
+sample_size =  # размер полученной выборки
 
 # Базовая конверсия
 p0 = ${params.p0} / 100
@@ -148,8 +148,8 @@ function binaryTwoSidedCalculationContent(params: OneSampleStandardCalculationRe
     code: `from scipy.stats import binomtest
 
 
-success_cnt = \<количество успешных реализаций\>
-sample_size = \<размер полученной выборки\>
+success_cnt =  # количество успешных реализаций
+sample_size =  # размер полученной выборки
 
 # Базовая конверсия
 p0 = ${params.p0} / 100
@@ -196,8 +196,8 @@ function nonBinaryLeftSidedCalculationContent(params: OneSampleStandardCalculati
 from statsmodels.stats.weightstats import ztest
 
 
-sample = \<значения целевой метрики на выборке клиентов\>
-mu0 =    \<целевое значение метрики\>
+sample =  # значения целевой метрики на выборке клиентов
+mu0 =  # целевое значение метрики (среднее)
 mu = np.mean(sample)
 alpha = ${params.alpha} / 100
 
@@ -237,8 +237,8 @@ function nonBinaryRightSidedCalculationContent(params: OneSampleStandardCalculat
 from statsmodels.stats.weightstats import ztest
 
 
-sample = \<значения целевой метрики на выборке клиентов\>
-mu0 =    \<целевое значение метрики\>
+sample =  # значения целевой метрики на выборке клиентов
+mu0 =  # целевое значение метрики (среднее)
 mu = np.mean(sample)
 alpha = ${params.alpha} / 100
 
@@ -278,8 +278,8 @@ function nonBinaryTwoSidedCalculationContent(params: OneSampleStandardCalculatio
 from statsmodels.stats.weightstats import ztest
 
 
-sample = \<значения целевой метрики на выборке клиентов\>
-mu0 =    \<целевое значение метрики\>
+sample =  # значения целевой метрики на выборке клиентов
+mu0 =  # целевое значение метрики (среднее)
 mu = np.mean(sample)
 alpha = ${params.alpha} / 100
 

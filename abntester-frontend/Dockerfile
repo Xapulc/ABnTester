@@ -1,4 +1,4 @@
-FROM node:18.16.1-alpine AS build
+FROM node:20-alpine3.18 AS build
 WORKDIR /dist/src/app
 # Copy files to virtual directory
 # COPY package.json package-lock.json ./
@@ -6,7 +6,7 @@ WORKDIR /dist/src/app
 #RUN npm cache clean
 # Copy files from local machine to virtual directory in docker image
 COPY . .
-RUN npm install --legacy-peer-deps
+RUN npm install
 RUN npm run build
 
 

@@ -1,6 +1,10 @@
-<tui-island size="l">
-  <div [mathjax]="content.description"></div>
+<tui-island size="l" *ngIf="content">
+  <div *ngIf="content.description" [mathjax]="content.description"></div>
   <tui-island *ngIf="content.code">
+    <button tuiIconButton type="button" appearance="flat"
+            class="copy-button"
+            (click)="copy()"
+            [icon]="'tuiIconCopyLarge'"></button>
     <pre><code [highlight]="content.code" [languages]="['python']"></code></pre>
   </tui-island>
 </tui-island>

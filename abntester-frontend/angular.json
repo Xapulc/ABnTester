@@ -90,10 +90,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "abntester-frontend:build:production"
+              "buildTarget": "abntester-frontend:build:production"
             },
             "development": {
-              "browserTarget": "abntester-frontend:build:development"
+              "buildTarget": "abntester-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -101,7 +101,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "abntester-frontend:build"
+            "buildTarget": "abntester-frontend:build"
           }
         },
         "test": {
