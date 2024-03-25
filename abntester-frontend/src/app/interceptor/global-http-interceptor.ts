@@ -15,7 +15,7 @@ export class GlobalHttpInterceptor implements HttpInterceptor {
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
           const errorMessage = error.error?.error || error.statusText
-          const message = `${error.status} : ${errorMessage}`
+          const message = `${error.status}<br/>${errorMessage}`
           this.alerts
             .open(message, {
               label: 'Ошибка при обращении к серверу',

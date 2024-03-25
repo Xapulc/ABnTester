@@ -3,6 +3,8 @@ package com.abntester.sample.twosample
 import com.abntester.sample.SampleSizeCalculationBinaryBaseRequest
 import com.abntester.sample.SampleSizeCalculationNonBinaryBaseRequest
 import com.abntester.sample.common.SampleAlternative
+import com.abntester.sample.validation.AlphaBetaValidation
+import com.abntester.sample.validation.BinaryMdeValidation
 import java.math.BigDecimal
 import javax.validation.Valid
 import javax.validation.constraints.DecimalMax
@@ -35,6 +37,8 @@ class TwoSampleCalculationController(private val twoSampleCalculationService: Tw
 
 }
 
+@AlphaBetaValidation
+@BinaryMdeValidation
 data class TwoSampleBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)
@@ -53,6 +57,7 @@ data class TwoSampleBinaryCalculationRequest(
     override val alternative: SampleAlternative,
 ) : SampleSizeCalculationBinaryBaseRequest
 
+@AlphaBetaValidation
 data class TwoSampleNonBinaryCalculationRequest(
     @field:DecimalMin(value = "0", inclusive = false)
     @field:DecimalMax(value = "100", inclusive = false)

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {
   DefaultFormControlValueAccessorComponent,
 } from '../../utils/default-form-control-value-accessor/default-form-control-value-accessor.component';
@@ -20,7 +20,7 @@ import {FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angula
     },
   ],
 })
-export class MdeComponent extends DefaultFormControlValueAccessorComponent implements OnInit {
+export class MdeComponent extends DefaultFormControlValueAccessorComponent implements OnInit, OnChanges {
 
   form = new FormControl(1, [Validators.required, Validators.min(0.00001)]);
 
@@ -28,8 +28,18 @@ export class MdeComponent extends DefaultFormControlValueAccessorComponent imple
 
   override ngOnInit() {
     super.ngOnInit();
+    this.refreshValidators()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.refreshValidators()
+  }
+
+  refreshValidators() {
     if (this.isPercent) {
       this.form.addValidators(Validators.max(100))
+    } else {
+      this.form.clearValidators()
     }
   }
 

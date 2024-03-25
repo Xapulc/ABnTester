@@ -1,6 +1,7 @@
 package com.abntester.sample.validation
 
 import com.abntester.sample.SampleSizeCalculationBinaryBaseRequest
+import com.abntester.sample.common.SampleAlternative
 import com.abntester.utils.ONE_HUNDRED
 import java.math.BigDecimal
 import javax.validation.Constraint
@@ -25,20 +26,28 @@ class BinaryMdeValidator : ConstraintValidator<BinaryMdeValidation, SampleSizeCa
         value: SampleSizeCalculationBinaryBaseRequest?,
         context: ConstraintValidatorContext,
     ): Boolean {
-        return when {
-            value == null -> true
-            value.mde > ONE_HUNDRED -> returnWithMdeInvalidMessage("Не выполнено условие: MDE <= 100%", context)
-            value.mde >= value.p -> returnWithMdeInvalidMessage("Не выполнено условие: MDE < p", context)
-            value.mde >= (BigDecimal.ONE - value.p) -> returnWithMdeInvalidMessage(
+        if (value == null) {
+            return true
+        }
+        if (value.mde > ONE_HUNDRED) {
+            return applyMdeInvalidMessage("Не выполнено условие: MDE <= 100%", context)
+        }
+        if (value.alternative != SampleAlternative.RIGHT_SIDED && value.mde >= value.p) {
+            return applyMdeInvalidMessage(
+                "Не выполнено условие: MDE < p",
+                context
+            )
+        }
+        if (value.alternative != SampleAlternative.LEFT_SIDED && value.mde >= (BigDecimal.valueOf(100) - value.p)) {
+            return applyMdeInvalidMessage(
                 "Не выполнено условие: MDE < (1 - p)",
                 context
             )
-
-            else -> true
         }
+        return true
     }
 
-    private fun returnWithMdeInvalidMessage(errorMsg: String, context: ConstraintValidatorContext): Boolean {
+    private fun applyMdeInvalidMessage(errorMsg: String, context: ConstraintValidatorContext): Boolean {
         context.apply {
             disableDefaultConstraintViolation()
             buildConstraintViolationWithTemplate(errorMsg)

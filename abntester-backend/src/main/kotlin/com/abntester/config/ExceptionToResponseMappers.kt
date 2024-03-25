@@ -17,7 +17,7 @@ class ConstraintViolationExceptionToResponseMapper : ExceptionMapper<ConstraintV
     }
 
     private fun Path.getAllInsteadFirstTwo(): String {
-        return drop(2).map { it.name }.joinToString(separator = ".") { it }
+        return drop(2).map { it.name.orEmpty() }.joinToString(separator = ".") { it }
     }
 }
 
