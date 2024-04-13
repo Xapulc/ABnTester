@@ -17,6 +17,7 @@ import {
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {TwoSampleFormComponent} from './two-sample-form/two-sample-form.component';
+import {SequentialTwoSampleFormComponent} from './sequential-two-sample-form/sequential-two-sample-form.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   TuiFieldErrorPipeModule,
@@ -31,6 +32,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {OneSampleFormComponent} from './one-sample-form/one-sample-form.component';
+import {SequentialOneSampleFormComponent} from './sequential-one-sample-form/sequential-one-sample-form.component';
 import {IsBinaryRadioComponent} from './parameters/is-binary-radio/is-binary-radio.component';
 import {AlphaComponent} from './parameters/alpha/alpha.component';
 import {BetaComponent} from './parameters/beta/beta.component';
@@ -51,7 +53,9 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
   declarations: [
     AppComponent,
     TwoSampleFormComponent,
+    SequentialTwoSampleFormComponent,
     OneSampleFormComponent,
+    SequentialOneSampleFormComponent,
     IsBinaryRadioComponent,
     AlphaComponent,
     BetaComponent,

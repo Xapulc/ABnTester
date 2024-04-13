@@ -16,11 +16,19 @@ export class AppComponent {
   links = [
     {
       routeLink: '/calculation/one-sample',
-      displayName: 'Одна выборка',
+      displayName: 'Классический дизайн, одна выборка',
     },
     {
       routeLink: '/calculation/two-sample',
-      displayName: 'Две выборки',
+      displayName: 'Классический дизайн, две выборки',
+    },
+    {
+      routeLink: '/calculation/sequential-one-sample',
+      displayName: 'Последовательный анализ, одна выборка',
+    },
+    {
+      routeLink: '/calculation/sequential-two-sample',
+      displayName: 'Последовательный анализ, две выборки',
     },
   ]
 
