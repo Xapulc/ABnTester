@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Clipboard} from '@angular/cdk/clipboard';
 import {TuiAlertService} from '@taiga-ui/core';
 import {Location} from '@angular/common';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {aplhaPlusBetaValidator} from '../utils/validator/alpha-beta-validator';
 import {binaryMdeValidator} from '../utils/validator/binary-mde-validator';
 import {BinarySampleType} from "../parameters/is-binary-radio/is-binary-radio.model";
@@ -47,7 +47,11 @@ export class SequentialTwoSampleFormComponent extends BaseCalculationFormCompone
   }
 
   calculate(): Observable<CalculateTwoSampleResponse> {
-    return this.twoSampleCalculationService.calculateBinary(this.form.value)
+    return of(<CalculateTwoSampleResponse> {
+      leftSampleSize: 100,
+      rightSampleSize: 100
+    })
+    // return this.twoSampleCalculationService.calculateBinary(this.form.value)
   }
 
   getSuitableCalculationContent() {
