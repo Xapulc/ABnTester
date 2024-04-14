@@ -51,6 +51,7 @@ export class SequentialTwoSampleFormComponent extends BaseCalculationFormCompone
       leftSampleSize: 100,
       rightSampleSize: 100
     })
+    // TODO: выпилить заглушку
     // return this.twoSampleCalculationService.calculateBinary(this.form.value)
   }
 
