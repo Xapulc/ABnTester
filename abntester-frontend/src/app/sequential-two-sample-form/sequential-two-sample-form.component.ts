@@ -7,7 +7,7 @@ import {
   TwoSampleStandardCalculationResultParams,
 } from './sequential-two-sample-calculation-result-messages.model';
 import {BaseCalculationFormComponent} from '../utils/base-calculation-form/base-calculation-form.component';
-import {HintContentModel} from '../hint-content/hint-content.model';
+import {HintContentModel, HintContentParams} from '../hint-content/hint-content.model';
 import {twoSampleHints} from './sequential-two-sample-hint-messages.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Clipboard} from '@angular/cdk/clipboard';
@@ -16,6 +16,8 @@ import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
 import {aplhaPlusBetaValidator} from '../utils/validator/alpha-beta-validator';
 import {binaryMdeValidator} from '../utils/validator/binary-mde-validator';
+import {BinarySampleType} from "../parameters/is-binary-radio/is-binary-radio.model";
+import { getSuitableHintContent } from '../hint-content/hint-content.utils';
 
 
 @Component({
@@ -50,6 +52,10 @@ export class SequentialTwoSampleFormComponent extends BaseCalculationFormCompone
 
   getSuitableCalculationContent() {
     return getCalculationContent(this.lastAppliedResult!)
+  }
+
+  override getSuitableHintContent(): HintContentParams {
+    return getSuitableHintContent(BinarySampleType.BINARY, this.form.get('alternative')?.value, this.hints)
   }
 
   protected getCalculationParams(response: CalculateTwoSampleResponse): TwoSampleStandardCalculationResultParams {

@@ -16,6 +16,9 @@ import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
 import {aplhaPlusBetaValidator} from '../utils/validator/alpha-beta-validator';
 import {binaryMdeValidator} from '../utils/validator/binary-mde-validator';
+import {HintContentParams} from "../hint-content/hint-content.model";
+import {BinarySampleType} from "../parameters/is-binary-radio/is-binary-radio.model";
+import { getSuitableHintContent } from '../hint-content/hint-content.utils';
 
 @Component({
   selector: 'app-sequential-one-sample-form',
@@ -68,6 +71,10 @@ export class SequentialOneSampleFormComponent extends BaseCalculationFormCompone
       beta: this.lastAppliedResult?.beta,
       alternative: this.lastAppliedResult?.alternative,
     }
+  }
+
+  override getSuitableHintContent(): HintContentParams {
+    return getSuitableHintContent(BinarySampleType.BINARY, this.form.get('alternative')?.value, this.hints)
   }
 
   protected override targetName(): string {

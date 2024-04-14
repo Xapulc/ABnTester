@@ -6,14 +6,6 @@ export interface CalculateOneSampleBinaryRequest {
   alternative: string,
 }
 
-export interface CalculateOneSampleNonBinaryRequest {
-  alpha: number,
-  beta: number,
-  variance: number,
-  mde: number,
-  alternative: string,
-}
-
 export interface CalculateOneSampleResponse {
   sampleSize: number,
 }
