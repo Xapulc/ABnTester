@@ -17,7 +17,8 @@ import {Observable, of} from 'rxjs';
 import {aplhaPlusBetaValidator} from '../utils/validator/alpha-beta-validator';
 import {binaryMdeValidator} from '../utils/validator/binary-mde-validator';
 import {BinarySampleType} from "../parameters/is-binary-radio/is-binary-radio.model";
-import { getSuitableHintContent } from '../hint-content/hint-content.utils';
+import {getSuitableHintContent} from '../hint-content/hint-content.utils';
+import {OneTwoSidedAlternativeType} from "../parameters/one-two-sided-alternative/one-two-sided-alternative.model";
 
 
 @Component({
@@ -47,12 +48,14 @@ export class SequentialTwoSampleFormComponent extends BaseCalculationFormCompone
   }
 
   calculate(): Observable<CalculateTwoSampleResponse> {
-    return of(<CalculateTwoSampleResponse> {
-      leftSampleSize: 100,
-      rightSampleSize: 100
-    })
-    // TODO: выпилить заглушку
-    // return this.twoSampleCalculationService.calculateBinary(this.form.value)
+    if (this.form.get('alternative')?.value == OneTwoSidedAlternativeType.TWO_SIDED) {
+      return of(<CalculateTwoSampleResponse>{
+        hypothesis: {leftSampleSize: 0, rightSampleSize: 0},
+        alternative: {leftSampleSize: 0, rightSampleSize: 0},
+        max: {leftSampleSize: 0, rightSampleSize: 0},
+      })
+    }
+    return this.twoSampleCalculationService.calculateBinary(this.form.value)
   }
 
   getSuitableCalculationContent() {
@@ -70,8 +73,7 @@ export class SequentialTwoSampleFormComponent extends BaseCalculationFormCompone
       alpha: this.form.get('alpha')?.value,
       beta: this.form.get('beta')?.value,
       alternative: this.form.get('alternative')?.value,
-      firstSampleSize: response.leftSampleSize,
-      secondSampleSize: response.rightSampleSize,
+      calcResult: response,
     }
   }
 

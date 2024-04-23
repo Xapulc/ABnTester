@@ -14,7 +14,7 @@ export class OneSampleCalculationService {
   constructor(private http: HttpClient) {
   }
 
-  basePath = '/api/one-sample/calculate'
+  basePath = '/api/one-sample-sequential/calculate'
 
   calculateBinary(request: CalculateOneSampleBinaryRequest): Observable<CalculateOneSampleResponse> {
     return this.http.post<CalculateOneSampleResponse>(`${this.basePath}/binary`, request);

@@ -8,6 +8,12 @@ export interface CalculateTwoSampleBinaryRequest {
 }
 
 export interface CalculateTwoSampleResponse {
+  hypothesis: TwoSampleDto,
+  alternative: TwoSampleDto,
+  max: TwoSampleDto,
+}
+
+export interface TwoSampleDto {
   leftSampleSize: number,
   rightSampleSize: number,
 }

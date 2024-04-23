@@ -7,6 +7,8 @@ export interface CalculateOneSampleBinaryRequest {
 }
 
 export interface CalculateOneSampleResponse {
-  sampleSize: number,
+  hypothesisSampleSize: number,
+  alternativeSampleSize: number,
+  maxSampleSize: number,
 }
 

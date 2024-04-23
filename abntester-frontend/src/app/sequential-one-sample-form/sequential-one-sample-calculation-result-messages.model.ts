@@ -8,8 +8,10 @@ export interface OneSampleStandardCalculationResultParams {
   mde: number,
   alpha: number,
   beta: number,
-  sampleSize: number,
   alternative: OneTwoSidedAlternativeType,
+  hypothesisSampleSize: number,
+  alternativeSampleSize: number,
+  maxSampleSize: number,
 }
 
 export function getCalculationContent(params: OneSampleStandardCalculationResultParams) {
@@ -40,9 +42,9 @@ function binaryLeftSidedCalculationContent(params: OneSampleStandardCalculationR
       Можно оценить средний размер выборки до остановки теста.
       Он будет зависеть от истинного значения конверсии $p$:
       <ul class="tui-list">
-      <li class="tui-list__item"> если реальная конверсия $p$ не меньше $${params.p0}\\%$, то средний размер выборки не превышает <b><span style="font-size: 150%">${params.sampleSize}</span></b>,</li>
-      <li class="tui-list__item"> если реальная конверсия $p$ не больше $${p0_mde}\\%$, то средний размер выборки не превышает <b><span style="font-size: 150%">${params.sampleSize}</span></b>,</li>
-      <li class="tui-list__item"> в худшем случае средний размер выборки будет равен <b><span style="font-size: 150%">${params.sampleSize}</span></b>.</li>
+      <li class="tui-list__item"> если реальная конверсия $p$ не меньше $${params.p0}\\%$, то средний размер выборки не превышает <b><span style="font-size: 150%">${params.hypothesisSampleSize}</span></b>,</li>
+      <li class="tui-list__item"> если реальная конверсия $p$ не больше $${p0_mde}\\%$, то средний размер выборки не превышает <b><span style="font-size: 150%">${params.alternativeSampleSize}</span></b>,</li>
+      <li class="tui-list__item"> в худшем случае средний размер выборки будет равен <b><span style="font-size: 150%">${params.maxSampleSize}</span></b>.</li>
       </ul>
       <h1>Критерий</h1>
       Последовательный анализ реализован в <a href="https://colab.research.google.com/drive/1CF1EJwnn3A2z6XevgACWvqRZNWihJCHv#scrollTo=Jt7ub51xJ-Zy&line=4&uniqifier=1"> colab блокноте</a>.
@@ -56,7 +58,7 @@ beta = ${params.beta} / 100
 sprt = BinaryOneSampleSprt(p0, d, alpha, beta,
                            alternative="less")
 
-# Можно добавлять по одноме элементу с помощью метода sprt.append
+# Можно добавлять по одному элементу с помощью метода sprt.append
 # или добавлять сразу всю выборку с помощью sprt.append_list
 # Оба метода возвращают описание решения, которое следует принять:
 # или продолжать тест, или завершать с определённым выводом`,
@@ -81,9 +83,9 @@ function binaryRightSidedCalculationContent(params: OneSampleStandardCalculation
       Можно оценить средний размер выборки до остановки теста.
       Он будет зависеть от истинного значения конверсии $p$:
       <ul class="tui-list">
-      <li class="tui-list__item"> если реальная конверсия $p$ не больше $${params.p0}\\%$, то средний размер выборки не превышает <b><span style="font-size: 150%">${params.sampleSize}</span></b>,</li>
-      <li class="tui-list__item"> если реальная конверсия $p$ не меньше $${p0_mde}\\%$, то средний размер выборки не превышает <b><span style="font-size: 150%">${params.sampleSize}</span></b>,</li>
-      <li class="tui-list__item"> в худшем случае средний размер выборки будет равен <b><span style="font-size: 150%">${params.sampleSize}</span></b>.</li>
+      <li class="tui-list__item"> если реальная конверсия $p$ не больше $${params.p0}\\%$, то средний размер выборки не превышает <b><span style="font-size: 150%">${params.hypothesisSampleSize}</span></b>,</li>
+      <li class="tui-list__item"> если реальная конверсия $p$ не меньше $${p0_mde}\\%$, то средний размер выборки не превышает <b><span style="font-size: 150%">${params.alternativeSampleSize}</span></b>,</li>
+      <li class="tui-list__item"> в худшем случае средний размер выборки будет равен <b><span style="font-size: 150%">${params.maxSampleSize}</span></b>.</li>
       </ul>
       <h1>Критерий</h1>
       Последовательный анализ реализован в <a href="https://colab.research.google.com/drive/1CF1EJwnn3A2z6XevgACWvqRZNWihJCHv#scrollTo=Jt7ub51xJ-Zy&line=4&uniqifier=1"> colab блокноте</a>.
@@ -97,7 +99,7 @@ beta = ${params.beta} / 100
 sprt = BinaryOneSampleSprt(p0, d, alpha, beta,
                            alternative="greater")
 
-# Можно добавлять по одноме элементу с помощью метода sprt.append
+# Можно добавлять по одному элементу с помощью метода sprt.append
 # или добавлять сразу всю выборку с помощью sprt.append_list
 # Оба метода возвращают описание решения, которое следует принять:
 # или продолжать тест, или завершать с определённым выводом`,
@@ -133,7 +135,7 @@ beta = ${params.beta} / 100
 sprt = BinaryOneSampleSprt(p0, d, alpha, beta,
                            alternative="two-sided")
 
-# Можно добавлять по одноме элементу с помощью метода sprt.append
+# Можно добавлять по одному элементу с помощью метода sprt.append
 # или добавлять сразу всю выборку с помощью sprt.append_list
 # Оба метода возвращают описание решения, которое следует принять:
 # или продолжать тест, или завершать с определённым выводом`,

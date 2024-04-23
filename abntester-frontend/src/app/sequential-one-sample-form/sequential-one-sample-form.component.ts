@@ -13,12 +13,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Clipboard} from '@angular/cdk/clipboard';
 import {TuiAlertService} from '@taiga-ui/core';
 import {Location} from '@angular/common';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {aplhaPlusBetaValidator} from '../utils/validator/alpha-beta-validator';
 import {binaryMdeValidator} from '../utils/validator/binary-mde-validator';
 import {HintContentParams} from "../hint-content/hint-content.model";
 import {BinarySampleType} from "../parameters/is-binary-radio/is-binary-radio.model";
-import { getSuitableHintContent } from '../hint-content/hint-content.utils';
+import {getSuitableHintContent} from '../hint-content/hint-content.utils';
+import {OneTwoSidedAlternativeType} from "../parameters/one-two-sided-alternative/one-two-sided-alternative.model";
 
 @Component({
   selector: 'app-sequential-one-sample-form',
@@ -44,6 +45,13 @@ export class SequentialOneSampleFormComponent extends BaseCalculationFormCompone
   hints = oneSampleHints
 
   calculate(): Observable<CalculateOneSampleResponse> {
+    if (this.form.get('alternative')?.value == OneTwoSidedAlternativeType.TWO_SIDED) {
+      return of(<CalculateOneSampleResponse>{
+        hypothesisSampleSize: 0,
+        alternativeSampleSize: 0,
+        maxSampleSize: 0
+      })
+    }
     return this.oneSampleCalculationService.calculateBinary(this.form.value)
   }
 
@@ -57,8 +65,10 @@ export class SequentialOneSampleFormComponent extends BaseCalculationFormCompone
       mde: this.form.get('mde')?.value,
       alpha: this.form.get('alpha')?.value,
       beta: this.form.get('beta')?.value,
-      sampleSize: response.sampleSize,
       alternative: this.form.get('alternative')?.value,
+      hypothesisSampleSize: response.hypothesisSampleSize,
+      alternativeSampleSize: response.alternativeSampleSize,
+      maxSampleSize: response.maxSampleSize,
     }
   }
 
