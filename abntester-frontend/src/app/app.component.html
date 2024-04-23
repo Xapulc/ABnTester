@@ -31,16 +31,40 @@
     </a>
   </header>
   <div class="content">
-    <tui-tabs [activeItemIndex]="activeItemIndex">
-      <button
-        tuiTab
-        *ngFor="let l of links"
-        (click)="navigate(l.routeLink)"
-      >
-        {{l.displayName}}
-      </button>
-    </tui-tabs>
-
+    <form class="select-form-container">
+      <div class="tui-row">
+        <div class="tui-col_12 tui-form__row_multi-fields">
+          <tui-select
+            class="tui-form__multi-field"
+            tuiTextfieldSize="l"
+            [formControl]="designTypesFormControl"
+          >
+            Дизайн теста
+            <input
+              tuiTextfield
+            />
+            <tui-data-list-wrapper
+              *tuiDataList
+              [items]="designTypes"
+            ></tui-data-list-wrapper>
+          </tui-select>
+          <tui-select
+            class="tui-form__multi-field"
+            tuiTextfieldSize="l"
+            [formControl]="numberOfSamplesFormControl"
+          >
+            Количество выборок
+            <input
+              tuiTextfield
+            />
+            <tui-data-list-wrapper
+              *tuiDataList
+              [items]="numberOfSamples"
+            ></tui-data-list-wrapper>
+          </tui-select>
+        </div>
+      </div>
+    </form>
     <router-outlet></router-outlet>
   </div>
 </tui-root>
