@@ -88,6 +88,6 @@ export class SequentialTwoSampleFormComponent extends BaseCalculationFormCompone
   }
 
   protected override targetName(): string {
-    return "TWO_SAMPLE";
+    return "SEQUENTIAL_TWO_SAMPLE";
   }
 }
